@@ -111,10 +111,10 @@ NODE_ENV = "development"
    npm run client
    ```
 3. Start both backend server and frontend appliication:
-  ```bash
-  npm run dev
-  ```
-3. Open the app in your browser at `http://localhost:3000`.
+   ```bash
+   npm run dev
+   ```
+6. Open the app in your browser at `http://localhost:3000`.
 
 ## API Endpoints
 | Method | Endpoint          | Description              |
