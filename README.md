@@ -47,7 +47,6 @@ This project is a **MERN (MongoDB, Express.js, React.js, Node.js)** full-stack a
   - MongoDB
 
 - **Dev Tools**:
-  - Redux DevTools
   - Postman for API testing
   - ESLint & Prettier for code quality
 
@@ -87,27 +86,34 @@ project-root
    # Install frontend dependencies
    cd ../client
    npm install
+
+   
+   # Install both backend and frontend dependencies
+   npm install
    ```
 
 ### Environment Variables
 Create a `.env` file in the `server` directory and configure the following:
 ```
-PORT=5000
+PORT=3000
 MONGO_URI=your-mongodb-connection-string
 JWT_SECRET=your-jwt-secret
+NODE_ENV = "development"
 ```
 
 ### Running the Application
 1. Start the backend server:
    ```bash
-   cd server
-   npm start
+   npm run server
    ```
 2. Start the frontend application:
    ```bash
-   cd client
-   npm start
+   npm run client
    ```
+3. Start both backend server and frontend appliication:
+  ```bash
+  npm run dev
+  ```
 3. Open the app in your browser at `http://localhost:3000`.
 
 ## API Endpoints
