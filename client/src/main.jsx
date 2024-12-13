@@ -9,6 +9,8 @@ import "./index.css";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
+import PrivateRoute from "./pages/Auth/PrivateRoute.jsx";
+import Profile from "./pages/User/Profile.jsx";
 
 // Create router with route definitions
 const router = createBrowserRouter(
@@ -17,6 +19,9 @@ const router = createBrowserRouter(
       <Route index element={<Home />} /> {/* Default route */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="" element={<PrivateRoute />} >
+        <Route path="/profile" element={<Profile />} />
+      </Route>
     </Route>
   )
 );

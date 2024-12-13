@@ -17,24 +17,20 @@ const Navigation = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
-  const [ logoutMutation ] = useLogoutMutation();
+  const [logoutMutation] = useLogoutMutation();
 
   const toggleDropdownOpen = () => setDropdownOpen((prev) => !prev);
 
-  // Function to handle user logout
   const handleLogout = async () => {
     try {
       await logoutMutation().unwrap();
       dispatch(logout());
-      navigate('/login');
+      navigate("/login");
     } catch (error) {
       toast.error(error?.data?.message || "Network Error, Try Again");
     }
   };
-  // This useEffect hook adds an event listener to detect clicks outside the dropdown.
-  // If a click is detected outside the dropdown, it will close the dropdown by setting dropdownOpen to false.
-  // The event listener is cleaned up when the component unmounts to avoid memory leaks.
-  // Close dropdown when clicking outside
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -47,119 +43,118 @@ const Navigation = () => {
   }, []);
 
   return (
-    <div className="sticky flex  w-fit left-0 right-0 bottom-10 mx-auto justify-center items-end z-50">
-      <div className="bg-[#0f0f0f] border min-w-fit  p-6 rounded shadow-lg">
-        <section className="flex justify-between items-center">
+    <div className="sticky flex w-[40%] left-0 right-0 bottom-10 mx-auto justify-center items-end z-50">
+      <div className="bg-gray-900 border w-full p-6 rounded-lg shadow-xl">
+        <section className="flex justify-between py-2">
           {/* Navigation Links */}
-          <div className="flex space-x-6">
+          <div className="flex space-x-8">
             <Link
               to="/"
-              className="flex items-center text-white hover:text-gray-300 transition"
+              className="flex items-center text-gray-200 hover:text-teal-400 transition-colors"
               aria-label="Home"
             >
               <AiOutlineHome size={26} />
-              <span className="hidden sm:block ml-2">Home</span>
+              <span className="hidden sm:block ml-2 font-medium">Home</span>
             </Link>
 
             <Link
               to="/movies"
-              className="flex items-center text-white hover:text-gray-300 transition"
+              className="flex items-center text-gray-200 hover:text-teal-400 transition-colors"
               aria-label="Movies"
             >
               <MdOutlineLocalMovies size={26} />
-              <span className="hidden sm:block ml-2">Movies</span>
+              <span className="hidden sm:block ml-2 font-medium">Movies</span>
             </Link>
           </div>
 
           {/* User Section */}
-          <div className="relative" ref={dropdownRef}>
-            {userInfo ? (
-              <>
-                <button
-                  onClick={toggleDropdownOpen}
-                  className="text-white flex items-center focus:outline-none"
-                  aria-label="User Menu"
+          {userInfo ? (
+            <div className="flex space-x-8" ref={dropdownRef}>
+              <button
+                onClick={toggleDropdownOpen}
+                className="text-gray-200 flex items-center focus:outline-none"
+                aria-label="User Menu"
+              >
+                <span className="font-medium">{userInfo.data.username}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-4 w-4 ml-2 transition-transform ${
+                    dropdownOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <span>{userInfo.username}</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`h-4 w-4 ml-2 transition-transform ${
-                      dropdownOpen ? "rotate-180" : ""
-                    }`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d={dropdownOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-                    />
-                  </svg>
-                </button>
-                {dropdownOpen ? (
-                  <ul
-                    className="absolute right-0 mt-2 bg-white text-gray-800 rounded shadow-lg w-40"
-                    role="menu"
-                  >
-                    {userInfo.isAdmin && (
-                      <li>
-                        <Link
-                          to="/admin/movies/dashboard"
-                          className="block px-4 py-2 hover:bg-gray-100"
-                          role="menuitem"
-                        >
-                          Dashboard
-                        </Link>
-                      </li>
-                    )}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d={dropdownOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
+                  />
+                </svg>
+              </button>
+              {dropdownOpen && (
+                <ul
+                  className="absolute right-0 mt-2 bg-gray-800 text-gray-200 rounded-lg shadow-lg w-48 divide-y divide-gray-700"
+                  role="menu"
+                >
+                  {userInfo.data.isAdmin && (
                     <li>
                       <Link
-                        to="/profile"
-                        className="block px-4 py-2 hover:bg-gray-100"
+                        to="/admin/movies/dashboard"
+                        className="block px-4 py-2 hover:bg-teal-500 hover:text-white transition-colors"
                         role="menuitem"
+                        onClick={() => setDropdownOpen(false)}
                       >
-                        Profile
+                        Dashboard
                       </Link>
                     </li>
-                    <li>
-                      <button
-                        onClick={handleLogout}
-                        className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                ) : null}
-              </>
-            ) : (
-              <ul className="flex items-center space-x-6">
-                <li>
-                  <Link
-                    to="/login"
-                    className="flex items-center text-white hover:text-gray-300 transition"
-                    aria-label="Login"
-                  >
-                    <AiOutlineLogin size={26} />
-                    <span className="hidden sm:block ml-2">Login</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/register"
-                    className="flex items-center text-white hover:text-gray-300 transition"
-                    aria-label="Register"
-                  >
-                    <AiOutlineUserAdd size={26} />
-                    <span className="hidden sm:block ml-2">Register</span>
-                  </Link>
-                </li>
-              </ul>
-            )}
-          </div>
+                  )}
+                  <li>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 hover:bg-teal-500 hover:text-white transition-colors"
+                      role="menuitem"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 hover:bg-teal-500 hover:text-white transition-colors"
+                      role="menuitem"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+          ) : (
+            <div className="flex space-x-8" ref={dropdownRef}>
+              <Link
+                to="/login"
+                className="flex items-center text-gray-200 hover:text-teal-400 transition-colors"
+                aria-label="Login"
+              >
+                <AiOutlineLogin size={26} />
+                <span className="hidden sm:block ml-2 font-medium">Login</span>
+              </Link>
+
+              <Link
+                to="/register"
+                className="flex items-center text-gray-200 hover:text-teal-400 transition-colors"
+                aria-label="Register"
+              >
+                <AiOutlineUserAdd size={26} />
+                <span className="hidden sm:block ml-2 font-medium">
+                  Register
+                </span>
+              </Link>
+            </div>
+          )}
         </section>
       </div>
     </div>
