@@ -10,10 +10,10 @@
   - [Environment Variables](#environment-variables)
   - [Running the Application](#running-the-application)
 - [API Endpoints](#api-endpoints)
-- [Screenshots](#screenshots)
 - [Future Enhancements](#future-enhancements)
 - [Contributing](#contributing)
 - [License](#license)
+<!-- - [Screenshots](#screenshots) -->
 
 ---
 
@@ -124,7 +124,7 @@ NODE_ENV = "development"
 | GET    | /api/users/profile | Get user profile       |
 | PUT    | /api/users/profile | Update user profile    |
 
-## Screenshots
+<!--## Screenshots
 ### Registration Page
 ![Registration Page](https://via.placeholder.com/800x400?text=Registration+Page)
 
@@ -133,7 +133,7 @@ NODE_ENV = "development"
 
 ### Dashboard
 ![Dashboard](https://via.placeholder.com/800x400?text=Dashboard)
-
+-->
 ## Future Enhancements
 - Add role-based authentication (Admin/User roles)
 - Integrate third-party APIs (e.g., payment gateways, email services)
