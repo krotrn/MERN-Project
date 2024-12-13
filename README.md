@@ -87,9 +87,6 @@ project-root
    cd ../client
    npm install
 
-   
-   # Install both backend and frontend dependencies
-   npm install
    ```
 
 ### Environment Variables
