@@ -114,7 +114,7 @@ NODE_ENV = "development"
    ```bash
    npm run dev
    ```
-6. Open the app in your browser at `http://localhost:3000`.
+6. Open the app in your browser at `http://localhost:5173` or other.
 
 ## API Endpoints
 | Method | Endpoint          | Description              |
