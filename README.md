@@ -10,9 +10,9 @@
   - [Environment Variables](#environment-variables)
   - [Running the Application](#running-the-application)
 - [API Endpoints](#api-endpoints)
-- [Future Enhancements](#future-enhancements)
 - [Contributing](#contributing)
 - [License](#license)
+<!-- - [Future Enhancements](#future-enhancements) -->
 <!-- - [Screenshots](#screenshots) -->
 
 ---
@@ -134,11 +134,11 @@ NODE_ENV = "development"
 ### Dashboard
 ![Dashboard](https://via.placeholder.com/800x400?text=Dashboard)
 -->
-## Future Enhancements
-- Add role-based authentication (Admin/User roles)
-- Integrate third-party APIs (e.g., payment gateways, email services)
-- Add unit and integration tests for enhanced reliability
-- Migrate to GraphQL for flexible data queries
+<!-- ## Future Enhancements -->
+<!-- - Add role-based authentication (Admin/User roles) -->
+<!-- - Integrate third-party APIs (e.g., payment gateways, email services) -->
+<!-- - Add unit and integration tests for enhanced reliability -->
+<!-- - Migrate to GraphQL for flexible data queries -->
 
 ## Contributing
 Contributions are welcome! Please follow these steps:
