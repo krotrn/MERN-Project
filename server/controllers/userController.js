@@ -28,7 +28,8 @@ const createUser = asyncHandler(async (req, res) => {
   if (!validatePasswordStrength(password)) {
     return res.status(422).json({
       status: "error",
-      message: "Password must be at least 8 characters long and contain numbers and special characters.",
+      message:
+        "Password must be at least 8 characters long and contain numbers and special characters.",
     });
   }
 
@@ -89,7 +90,10 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   }
 
-  const isPasswordMatched = await bcrypt.compare(password, existingUser.password);
+  const isPasswordMatched = await bcrypt.compare(
+    password,
+    existingUser.password
+  );
   if (!isPasswordMatched) {
     return res.status(401).json({
       status: "error",
@@ -189,7 +193,8 @@ const updateCurrentUserProfile = asyncHandler(async (req, res) => {
     if (!validatePasswordStrength(req.body.password)) {
       return res.status(422).json({
         status: "error",
-        message: "Password must be at least 8 characters long and contain numbers and special characters.",
+        message:
+          "Password must be at least 8 characters long and contain numbers and special characters.",
       });
     }
 
@@ -197,17 +202,24 @@ const updateCurrentUserProfile = asyncHandler(async (req, res) => {
     user.password = await bcrypt.hash(req.body.password, salt);
   }
 
-  const updatedUser = await user.save();
+  try {
+    const updatedUser = await user.save();
 
-  res.status(200).json({
-    status: "success",
-    data: {
-      _id: updatedUser._id,
-      username: updatedUser.username,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-    },
-  });
+    res.status(200).json({
+      status: "success",
+      data: {
+        _id: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: `Failed to update user: ${error.message}`,
+    });
+  }
 });
 
 export {

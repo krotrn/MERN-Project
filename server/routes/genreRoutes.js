@@ -3,8 +3,13 @@ import express from "express";
 const router = express.Router();
 
 // controllers
-import { createGenre, deleteGenre, getAllGenres } from "../controllers/genreController.js";
-
+import {
+  createGenre,
+  deleteGenre,
+  getAllGenres,
+  updateGenre,
+  readGenre,
+} from "../controllers/genreController.js";
 
 // Middlewares
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
@@ -12,8 +17,12 @@ import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 router
   .route("/")
   .post(authenticate, authorizeAdmin, createGenre)
-  .delete(authenticate, authorizeAdmin, deleteGenre)
   .get(authenticate, getAllGenres);
 
+router
+  .route("/:id")
+  .delete(authenticate, authorizeAdmin, deleteGenre)
+  .put(authenticate, authorizeAdmin, updateGenre)
+  .get(readGenre);
 
 export default router;
