@@ -8,7 +8,8 @@ import helmet from "helmet"; // for security
 // files
 
 import connectDB from "./config/db.js";
-import userRoutes from "./routes/UserRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import genreRoutes from "./routes/genreRoutes.js"
 
 // configuration of environment variables
 dotenv.config();
@@ -31,6 +32,7 @@ const PORT = process.env.PORT || 3000;
 
 // routes
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/genres", genreRoutes);
 
 // lisen to port
 app.listen(PORT, () => {
