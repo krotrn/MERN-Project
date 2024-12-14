@@ -44,8 +44,8 @@ const Navigation = () => {
 
   return (
     <div className="sticky flex w-[40%] left-0 right-0 bottom-10 mx-auto justify-center items-end z-50">
-      <div className="bg-gray-900 border w-full p-6 rounded-lg shadow-xl">
-        <section className="flex justify-between py-2">
+      <div className="bg-gray-900 border w-full min-w-fit p-6 rounded-lg shadow-xl">
+        <section className="flex justify-between space-x-4 py-2">
           {/* Navigation Links */}
           <div className="flex space-x-8">
             <Link
