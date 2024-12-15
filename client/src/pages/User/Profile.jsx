@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 import { setCredentials } from "../../redux/features/auth/authSlice";
-import { useProfileMutation } from "../../redux/api/user";
+import { useUpdateProfileMutation } from "../../redux/api/user.js";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -15,11 +15,11 @@ const Profile = () => {
   const { username, email, password, confirmPassword } = formData;
 
   const { userInfo } = useSelector((state) => state.auth);
-  const [updateProfile, { isLoading }] = useProfileMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo.data) {
       setFormData((data) => ({
         ...data,
         username: userInfo.data.username || "",

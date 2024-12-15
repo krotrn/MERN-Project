@@ -68,7 +68,7 @@ const Navigation = () => {
           </div>
 
           {/* User Section */}
-          {userInfo ? (
+          {userInfo.data ? (
             <div className="flex space-x-8" ref={dropdownRef}>
               <button
                 onClick={toggleDropdownOpen}
