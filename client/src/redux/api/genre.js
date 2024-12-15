@@ -25,7 +25,7 @@ export const genreApiSlice = apiSlice.injectEndpoints({
 
     // Mutation: Delete a genre
     deleteGenre: builder.mutation({
-      query: ({ id }) => ({
+      query: ( {id} ) => ({
         url: `${GENRE_URL}/${id}`,
         method: "DELETE",
       }),
@@ -39,9 +39,9 @@ export const genreApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: (result) =>
-        result
+        result && result.data
           ? [
-              ...result.map(({ _id }) => ({ type: "Genres", id: _id })), // Cache each genre
+              ...result.data.map(({ _id }) => ({ type: "Genres", id: _id })), // Cache each genre
               { type: "Genres", id: "LIST" },
             ]
           : [{ type: "Genres", id: "LIST" }], // Cache genre list

@@ -11,6 +11,8 @@ import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import PrivateRoute from "./pages/Auth/PrivateRoute.jsx";
 import Profile from "./pages/User/Profile.jsx";
+import AdminRoute from "./pages/Admin/AdminRoute.jsx";
+import GenreList from "./pages/Admin/GenreList.jsx";
 
 // Create router with route definitions
 const router = createBrowserRouter(
@@ -22,6 +24,10 @@ const router = createBrowserRouter(
       <Route path="" element={<PrivateRoute />} >
         <Route path="/profile" element={<Profile />} />
       </Route>
+      <Route path="/" element={<AdminRoute />}>
+        <Route path="/admin/movies/genre" element = {<GenreList />} />
+      </Route>
+
     </Route>
   )
 );
