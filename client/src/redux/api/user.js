@@ -3,39 +3,49 @@ import { USER_URL } from "../constants";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    // Mutation: User login
     login: builder.mutation({
       query: (data) => ({
         url: `${USER_URL}/login`,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["User"], // Optional: Cache invalidation for "User" tag
+      invalidatesTags: ["User"], // Invalidate cache for User
     }),
+
+    // Mutation: User registration
     register: builder.mutation({
       query: (data) => ({
         url: `${USER_URL}/register`,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User"], // Invalidate cache for User
     }),
+
+    // Query: Fetch the logged-in user profile
     getUser: builder.query({
       query: () => `${USER_URL}/profile`,
-      providesTags: ["User"],
+      providesTags: ["User"], // Cache User profile data
     }),
+
+    // Mutation: User logout
     logout: builder.mutation({
       query: () => ({
         url: `${USER_URL}/logout`,
         method: "POST",
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User"], // Invalidate User cache on logout
     }),
-    profile: builder.mutation({
+
+    // Mutation: Update user profile
+    updateProfile: builder.mutation({
       query: (data) => ({
         url: `${USER_URL}/profile`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["User"], // Invalidate cache for User profile
     }),
   }),
 });
@@ -45,5 +55,5 @@ export const {
   useRegisterMutation,
   useGetUserQuery,
   useLogoutMutation,
-  useProfileMutation
+  useUpdateProfileMutation,
 } = userApiSlice;

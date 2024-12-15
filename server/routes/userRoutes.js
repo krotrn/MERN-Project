@@ -40,6 +40,6 @@ router
 router
     .route('/profile')
     .get(authenticate, getCurrentUserProfile)
-    .put(authenticate, updateCurrentUserProfile);
+    .patch(authenticate, updateCurrentUserProfile);
 
 export default router;
