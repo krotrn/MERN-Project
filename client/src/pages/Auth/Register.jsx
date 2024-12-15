@@ -26,7 +26,7 @@ const Register = () => {
   const redirect = sp.get("redirect") || "/";
 
   useEffect(() => {
-    if (userInfo.data) navigate(redirect);
+    if (userInfo?.data) navigate(redirect);
   }, [navigate, redirect, userInfo]);
 
   const handleChange = (e) => {

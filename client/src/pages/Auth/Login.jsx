@@ -24,7 +24,7 @@ const Login = () => {
   const redirect = sp.get("redirect") || "/";
 
   useEffect(() => {
-    if (userInfo.data) navigate(redirect);
+    if (userInfo?.data) navigate(redirect);
   }, [navigate, userInfo, redirect]);
 
   const handleChange = (e) => {

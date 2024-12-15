@@ -68,7 +68,7 @@ const Navigation = () => {
           </div>
 
           {/* User Section */}
-          {userInfo.data ? (
+          {userInfo?.data ? (
             <div className="flex space-x-8" ref={dropdownRef}>
               <button
                 onClick={toggleDropdownOpen}
@@ -98,7 +98,7 @@ const Navigation = () => {
                   className="absolute right-0 mt-2 bg-gray-800 text-gray-200 rounded-lg shadow-lg w-48 divide-y divide-gray-700"
                   role="menu"
                 >
-                  {userInfo.data.isAdmin && (
+                  {userInfo?.data?.isAdmin && (
                     <li>
                       <Link
                         to="/admin/movies/dashboard"
