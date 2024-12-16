@@ -1,6 +1,5 @@
 import Genre from "../models/Genre.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
-import mongoose from "mongoose";
 
 // Create a new genre
 const createGenre = asyncHandler(async (req, res) => {
@@ -45,13 +44,6 @@ const createGenre = asyncHandler(async (req, res) => {
 // Delete a genre
 const deleteGenre = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  // Validate MongoDB ObjectId
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).json({
-      status: "error",
-      message: "Invalid ID format.",
-    });
-  }
 
   if (!id) {
     return res.status(400).json({
@@ -102,13 +94,6 @@ const getAllGenres = asyncHandler(async (req, res) => {
 const updateGenre = asyncHandler(async (req, res) => {
   const { name } = req.body;
   const { id } = req.params;
-  // Validate MongoDB ObjectId
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).json({
-      status: "error",
-      message: "Invalid ID format.",
-    });
-  }
   if (!name) {
     return res.status(400).json({
       status: "error",
@@ -146,14 +131,6 @@ const updateGenre = asyncHandler(async (req, res) => {
 
 const readGenre = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
-  // Validate MongoDB ObjectId
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).json({
-      status: "error",
-      message: "Invalid ID format.",
-    });
-  }
 
   try {
     const genre = await Genre.findById(id).lean();
