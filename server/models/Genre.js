@@ -1,21 +1,46 @@
 import mongoose from "mongoose";
 
+const { Schema, model } = mongoose;
 
-
-const genreSchema = new mongoose.Schema(
+const genreSchema = new Schema(
   {
     name: {
       type: String,
+      required: [true, "Genre name is required"],
       trim: true,
-      required: true,
-      maxLength: 32,
       unique: true,
-      match: /^[a-zA-Z0-9\s]+$/,
-    },    
+      maxLength: [50, "Genre name must not exceed 50 characters"], // Increased max length for flexibility
+      match: [/^[a-zA-Z0-9\s]+$/, "Genre name must contain only letters, numbers, and spaces"],
+    },
+    description: {
+      type: String,
+      trim: true,
+      maxLength: [200, "Description must not exceed 200 characters"], // Optional description field
+      default: "No description provided.",
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now, // Automatically set creation timestamp
+    },
   },
-  { timestamps: true }
+  { timestamps: true } // Automatically adds `createdAt` and `updatedAt`
 );
 
+// Middleware: Ensure `name` is saved in lowercase
+genreSchema.pre("save", function (next) {
+  this.name = this.name.toLowerCase(); // Normalize genre names to lowercase
+  next();
+});
 
+// Virtual Field: Capitalized name for display purposes
+genreSchema.virtual("displayName").get(function () {
+  return this.name
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+});
 
-export default mongoose.model("Genre", genreSchema);
+// Indexing: Add a unique index on `name` for optimized queries
+genreSchema.index({ name: 1 }, { unique: true });
+
+export default model("Genre", genreSchema);

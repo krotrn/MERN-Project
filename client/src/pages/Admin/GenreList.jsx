@@ -21,52 +21,65 @@ const GenreList = () => {
   const [updateGenre, { isLoading: isUpdating }] = useUpdateGenreMutation();
   const [deleteGenre, { isLoading: isDeleting }] = useDeleteGenreMutation();
 
-  // Handle new genre creation
+  // Helper: Close Modal
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedGenre(null);
+    setUpdatingName("");
+  };
+
+  // Handle Create Genre
   const handleCreateGenre = async (e) => {
     e.preventDefault();
+    if (!name.trim() || name.length > 50) {
+      toast.error("Genre name is required and must be less than 50 characters.");
+      return;
+    }
+
     try {
-      await createGenre({ name }).unwrap();
-      toast.success("Genre created successfully");
+      await createGenre({ name: name.trim() }).unwrap();
+      toast.success("Genre created successfully!");
       setName("");
       refetch();
     } catch (error) {
       console.error("Create Genre Error:", error);
-      toast.error(error.data?.message || "Failed to create genre");
+      toast.error(error.data?.message || "Failed to create genre.");
     }
   };
 
-  // Handle genre update
+  // Handle Update Genre
   const handleUpdateGenre = async (e) => {
     e.preventDefault();
-    if (!updatingName.trim()) {
-      toast.error("Genre Name is Required");
+    if (!updatingName.trim() || updatingName.length > 50) {
+      toast.error("Genre name is required and must be less than 50 characters.");
       return;
     }
+
     try {
       await updateGenre({
         id: selectedGenre._id,
-        updatedGenre: { name: updatingName },
+        updatedGenre: { name: updatingName.trim() },
       }).unwrap();
-      toast.success("Genre updated successfully");
-      setModalVisible(false);
+      toast.success("Genre updated successfully!");
+      closeModal();
       refetch();
     } catch (error) {
       console.error("Update Genre Error:", error);
-      toast.error(error.data?.message || "Failed to update genre");
+      toast.error(error.data?.message || "Failed to update genre.");
     }
   };
 
-  // Handle genre deletion
+  // Handle Delete Genre
   const handleDeleteGenre = async () => {
     if (window.confirm("Are you sure you want to delete this genre?")) {
       try {
         await deleteGenre({ id: selectedGenre._id }).unwrap();
-        toast.success("Genre deleted successfully");
-        setModalVisible(false);
+        toast.success("Genre deleted successfully!");
+        closeModal();
         refetch();
       } catch (error) {
         console.error("Delete Genre Error:", error);
-        toast.error(error.data?.message || "Failed to delete genre");
+        toast.error(error.data?.message || "Failed to delete genre.");
       }
     }
   };
@@ -85,7 +98,7 @@ const GenreList = () => {
         <input
           type="text"
           name="genre"
-          className="py-3 px-4 border rounded-lg w-full"
+          className="py-3 px-4 border rounded-lg w-full focus:ring-2 focus:ring-teal-500"
           placeholder="Enter new genre"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -97,7 +110,7 @@ const GenreList = () => {
           className="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50"
           disabled={isCreating}
         >
-          {isCreating ? "Creating..." : "Add Genre"}
+          {isCreating ? <Loader /> : "Add Genre"}
         </button>
       </form>
 
@@ -122,7 +135,7 @@ const GenreList = () => {
         )}
       </div>
 
-      {/* Modal for Updating/Deleting Genre */}
+      {/* Modal for Editing Genre */}
       {modalVisible && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
@@ -130,7 +143,7 @@ const GenreList = () => {
             <form onSubmit={handleUpdateGenre} className="space-y-4">
               <input
                 type="text"
-                className="py-3 px-4 border rounded-lg w-full"
+                className="py-3 px-4 border rounded-lg w-full focus:ring-2 focus:ring-teal-500"
                 value={updatingName}
                 onChange={(e) => setUpdatingName(e.target.value)}
                 name="genre"
@@ -143,7 +156,7 @@ const GenreList = () => {
                   className="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50"
                   disabled={isUpdating}
                 >
-                  {isUpdating ? "Updating..." : "Update"}
+                  {isUpdating ? <Loader /> : "Update"}
                 </button>
                 <button
                   type="button"
@@ -151,12 +164,12 @@ const GenreList = () => {
                   className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                   disabled={isDeleting}
                 >
-                  {isDeleting ? "Deleting..." : "Delete"}
+                  {isDeleting ? <Loader /> : "Delete"}
                 </button>
               </div>
             </form>
             <button
-              onClick={() => setModalVisible(false)}
+              onClick={closeModal}
               className="mt-4 text-gray-500 hover:text-gray-700"
             >
               Cancel
