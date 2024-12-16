@@ -13,6 +13,7 @@ import {
 
 // Middlewares
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
+import checkId from "../middlewares/checkId.js";
 
 router
   .route("/")
@@ -21,8 +22,8 @@ router
 
 router
   .route("/:id")
-  .delete(authenticate, authorizeAdmin, deleteGenre)
-  .put(authenticate, authorizeAdmin, updateGenre)
-  .get(readGenre);
+  .delete(checkId,authenticate, authorizeAdmin, deleteGenre)
+  .put(checkId, authenticate, authorizeAdmin, updateGenre)
+  .get(checkId, readGenre);
 
 export default router;
