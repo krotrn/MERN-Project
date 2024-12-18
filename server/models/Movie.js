@@ -5,7 +5,7 @@ const { Schema, model } = mongoose;
 // Review Schema
 const reviewSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       required: [true, "User name is required"],
       trim: true,
@@ -100,6 +100,7 @@ movieSchema.virtual("rating").get(function () {
   return totalRating / this.reviews.length;
 });
 
+// Virtual field for last fetched date
 movieSchema.virtual("fetchedAt").get(function () {
   return new Date().toISOString();
 });

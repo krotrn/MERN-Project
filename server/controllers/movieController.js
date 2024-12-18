@@ -85,11 +85,11 @@ const getAllMovies = asyncHandler(async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      results: updatedMovie.length,
+      results: movies.length,
       totalMovies,
       currentPage: pageNumber,
       totalPages: Math.ceil(totalMovies / pageSize),
-      data: updatedMovie,
+      data: movies,
     });
   } catch (error) {
     console.error("Error fetching movies:", error);
@@ -197,7 +197,7 @@ const movieReview = asyncHandler(async (req, res) => {
 
     // Create the review object
     const review = {
-      userName: req.User.username,
+      username: req.User.username,
       rating,
       comment: comment.trim(),
       user: req.User._id,
