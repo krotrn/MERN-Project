@@ -63,14 +63,16 @@ const movieSchema = new Schema(
       trim: true,
       maxlength: [2000, "Details must not exceed 2000 characters"],
     },
-    cast: [
-      {
-        type: String,
-        trim: true,
-        maxlength: [100, "Cast member names must not exceed 100 characters"],
-      },
-    ],
-    reviews: [reviewSchema],
+    cast: {
+      type: [String],
+      trim: true,
+      maxlength: [100, "Cast member names must not exceed 100 characters"],
+      default: [],
+    },
+    reviews: {
+      type: [reviewSchema],
+      default: [],
+    },
     createdAt: {
       type: Date,
       default: new Date().toISOString(),
@@ -78,27 +80,21 @@ const movieSchema = new Schema(
     updatedAt: {
       type: Date,
       default: new Date().toISOString(),
+    }, 
+    numReviews: {
+      type: Number,
+      default: 0,
+    },
+    rating: {
+      type: Number,
+      default: 0,
     }
   },
   { timestamps: true }
 );
 
-// Virtual field for number of reviews
-movieSchema.virtual("numReview").get(function () {
-  return this.reviews.length;
-});
 
-// Virtual field for average rating
-movieSchema.virtual("rating").get(function () {
-  // Check if there are reviews
-  if (this.reviews.length === 0) {
-    return 0;  // Return 0 or a default value if there are no reviews
-  }
 
-  // Calculate the average rating
-  const totalRating = this.reviews.reduce((acc, item) => item.rating + acc, 0);
-  return totalRating / this.reviews.length;
-});
 
 // Virtual field for last fetched date
 movieSchema.virtual("fetchedAt").get(function () {
@@ -111,8 +107,30 @@ movieSchema.virtual("fetchedAt").get(function () {
 movieSchema.pre("save", async function (next) {
   if (this.isModified("title")) {
     this.title = this.title
+      .trim()
       .toLowerCase()
       .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+  if(this.isModified("rating")) {
+    this.rating = this.reviews.reduce((acc, item) => item.rating + acc, 0) / this.reviews.length;
+  }
+  if (this.isModified("updatedAt")) {
+    this.updatedAt = new Date().toISOString();
+  }
+  if (!this.createdAt) {
+    this.createdAt = new Date().toISOString();
+  }
+  if(this.isModified("reviews")) {
+    this.numReviews = this.reviews.length;
+  }
+  if (this.isModified("detail")) {
+    this.detail = this.detail.trim();
+  }
+  if(this.isModified("cast")) {
+    this.cast = this.cast.map((item) => item.trim());
+  }
+  if(this.isModified("genre")) {
+    this.genre = this.genre.trim();
   }
   next();
 });

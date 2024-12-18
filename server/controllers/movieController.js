@@ -2,10 +2,9 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import Movie from "../models/Movie.js";
 
 const createMovie = asyncHandler(async (req, res) => {
-  const { title, image, year, genre, detail, cast, reviews, createdAt } =
-    req.body;
+  const { title, image, year, genre, detail, cast, reviews } = req.body;
 
-  if (!title.trim() || !year.trim() || !genre.trim() || !detail.trim()) {
+  if (!title.trim() || !year || !genre.trim() || !detail.trim()) {
     return res.status(400).json({
       status: "fail",
       message: "Title, Year, Genre, and Detail are required fields.",
@@ -25,16 +24,13 @@ const createMovie = asyncHandler(async (req, res) => {
     }
 
     const newMovieData = {
-      title: title.trim(),
-      image:
-        image?.trim() || "https://via.placeholder.com/300x450?text=No+Image",
+      title,
+      image,
       year,
       genre,
-      detail: detail.trim(),
-      cast: cast?.map((c) => c.trim()) || [],
-      reviews: reviews || [],
-      createdAt: createdAt,
-      updatedAt: createdAt,
+      detail,
+      cast,
+      reviews,
     };
 
     const newMovie = new Movie(newMovieData);
@@ -171,7 +167,8 @@ const movieReview = asyncHandler(async (req, res) => {
     if (rating < 1 || rating > 5 || !comment.trim()) {
       return res.status(400).json({
         status: "fail",
-        message: "Rating must be between 1 and 5, and the comment cannot be empty.",
+        message:
+          "Rating must be between 1 and 5, and the comment cannot be empty.",
       });
     }
 
@@ -224,6 +221,67 @@ const movieReview = asyncHandler(async (req, res) => {
   }
 });
 
+const deteleMovie = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const movie = await Movie.findByIdAndDelete(id);
+    if (!movie) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Movie not Found",
+      });
+    }
+    return res.status(200).json({
+      status: "success",
+      message: "Movie deleted successfully",
+      data: movie,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+});
+
+const deleteComment = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { commentId } = req.body;
+    const movie = await Movie.findById(id);
+    if (!movie) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Movie not Found",
+      });
+    }
+    const comment = movie.reviews.findIndex(
+      (r) => r._id.toString() === commentId.toString()
+    );
+    if (comment === -1) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Comment not Found",
+      });
+    }
+    movie.reviews = movie.reviews.filter(
+      (r) => r._id.toString() !== commentId.toString()
+    );
+    const updatedMovie = await movie.save();
+    return res.status(200).json({
+      status: "success",
+      message: "Comment deleted successfully",
+      data: updatedMovie,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+});
+
+
 
 export {
   createMovie,
@@ -231,4 +289,6 @@ export {
   getSpecificMovie,
   updateMovie,
   movieReview,
+  deteleMovie,
+  deleteComment,
 };
