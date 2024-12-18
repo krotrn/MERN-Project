@@ -33,10 +33,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Static Method: Search by email with case-insensitivity
-userSchema.statics.findByEmail = async function (email) {
-  return this.findOne({ email: email.toLowerCase() });
-};
 
 // Virtual Field: Display user role
 userSchema.virtual("role").get(function () {
