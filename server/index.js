@@ -1,9 +1,12 @@
 import express from "express";
 import cookieParser from "cookie-parser"; // for parsing cookies
 import dotenv from "dotenv"; // for environment variables
-import cors from "cors"; // for cross-origin requests
+// import cors from "cors"; // for cross-origin requests
 import morgan from "morgan"; // for logging
 import helmet from "helmet"; // for security
+import path from "path";
+import { fileURLToPath } from "url";
+import rateLimit from "express-rate-limit"; // for rate limiting
 
 // files
 
@@ -22,15 +25,42 @@ connectDB();
 // create express app
 const app = express();
 
+// // Implement rate limiting
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, // Limit each IP to 100 requests per windowMs
+// });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const PORT = process.env.PORT || 3000;
+
 // middlewares
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded data (form data)
 app.use(express.json()); // for parsing application/json
 app.use(cookieParser()); // for parsing cookies
-app.use(cors()); // for cross-origin requests
+
+// app.use(limiter);
+
+// app.use(
+//   cors({
+//     origin: ["https://example.com"], // Allow specific domains only
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   })
+// );
+
 app.use(morgan("dev")); // for logging
 app.use(helmet()); // for security
 
-const PORT = process.env.PORT || 3000;
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    status: "error",
+    message: "An unexpected error occurred.",
+  });
+});
 
 // routes
 app.use("/api/v1/users", userRoutes);

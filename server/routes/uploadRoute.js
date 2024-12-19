@@ -2,8 +2,13 @@ import path from "path";
 import fs from "fs";
 import express from "express";
 import multer from "multer";
+import { fileURLToPath } from "url";
 
 const router = express.Router();
+
+// Simulating `__dirname` in ESModules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Ensure the uploads directory exists
 const uploadDir = path.join(__dirname, "../uploads");
@@ -25,7 +30,9 @@ const storage = multer.diskStorage({
 // File filter for image validation
 const fileFilter = (req, file, cb) => {
   const allowedFileTypes = /jpe?g|png|webp/;
-  const isFileTypeValid = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
+  const isFileTypeValid = allowedFileTypes.test(
+    path.extname(file.originalname).toLowerCase()
+  );
   const isMimeTypeValid = allowedFileTypes.test(file.mimetype);
 
   if (isFileTypeValid && isMimeTypeValid) {
@@ -68,7 +75,7 @@ router.use((err, req, res, next) => {
     if (err.code === "LIMIT_FILE_SIZE") {
       return res.status(400).json({
         status: "fail",
-        message: "File size exceeds the 2MB limit.",
+        message: "File size exceeds the 5MB limit.",
       });
     }
     return res.status(400).json({
