@@ -10,10 +10,10 @@ import {
   updateMovie,
   movieReview,
   deteleMovie,
-  deleteComment,
   getNewMovies,
   getTopMovies,
   getRandomMovies,
+  deleteReview,
 } from "../controllers/movieController.js";
 
 // middlewares
@@ -39,6 +39,6 @@ router
   .delete(authenticate, authorizeAdmin, checkId, deteleMovie);
 router
   .route("/delete-comment/:id")
-  .delete(authenticate, authorizeAdmin, checkId, deleteComment);
+  .delete(authenticate, authorizeAdmin, checkId, deleteReview);
 
 export default router;

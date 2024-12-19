@@ -244,10 +244,10 @@ const deteleMovie = asyncHandler(async (req, res) => {
   }
 });
 
-const deleteComment = asyncHandler(async (req, res) => {
+const deleteReview = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const { commentId } = req.body;
+    const { reviewId } = req.body;
     const movie = await Movie.findById(id);
     if (!movie) {
       return res.status(404).json({
@@ -256,7 +256,7 @@ const deleteComment = asyncHandler(async (req, res) => {
       });
     }
     const comment = movie.reviews.findIndex(
-      (r) => r._id.toString() === commentId.toString()
+      (r) => r._id.toString() === reviewId.toString()
     );
     if (comment === -1) {
       return res.status(404).json({
@@ -265,7 +265,7 @@ const deleteComment = asyncHandler(async (req, res) => {
       });
     }
     movie.reviews = movie.reviews.filter(
-      (r) => r._id.toString() !== commentId.toString()
+      (r) => r._id.toString() !== reviewId.toString()
     );
     const updatedMovie = await movie.save();
     return res.status(200).json({
@@ -332,7 +332,7 @@ export {
   updateMovie,
   movieReview,
   deteleMovie,
-  deleteComment,
+  deleteReview,
   getNewMovies,
   getTopMovies,
   getRandomMovies,
