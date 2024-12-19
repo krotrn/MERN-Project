@@ -281,7 +281,49 @@ const deleteComment = asyncHandler(async (req, res) => {
   }
 });
 
+const getNewMovies = asyncHandler(async (req, res) => {
+  try {
+    const newMovies = await Movie.find()
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .lean();
+    res.status(200).json({
+      status: "success",
+      data: newMovies,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
+const getTopMovies = asyncHandler(async (req, res) => {
+  try {
+    const topRatedMovies = await Movie.find()
+      .sort({ numReviews: -1 })
+      .limit(10)
+      .lean();
+    res.status(200).json({
+      status: "success",
+      data: topRatedMovies,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+const getRandomMovies = asyncHandler(async (req, res) => {
+  try {
+    const randomMovies = await Movie.aggregate([
+      { $sample: { size: 10 } },
+    ]).lean();
+    res.status(200).json({
+      status: "success",
+      data: randomMovies,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 export {
   createMovie,
@@ -291,4 +333,7 @@ export {
   movieReview,
   deteleMovie,
   deleteComment,
+  getNewMovies,
+  getTopMovies,
+  getRandomMovies,
 };
