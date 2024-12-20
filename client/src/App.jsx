@@ -22,7 +22,7 @@ const App = () => {
             
             
             {/* Main Content Area */}
-            <main className="py-3">
+            <main className="h-full">
                 <Outlet />
             </main>
             {/* Navigation Bar */}
