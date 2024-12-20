@@ -82,7 +82,7 @@ const CreateMovie = () => {
   };
 
   return (
-    <div className="container flex justify-center items-center mt-6">
+    <div className="flex justify-center items-center mt-6">
       <form
         onSubmit={handleCreateMovie}
         className="w-full max-w-2xl p-6 border rounded-lg shadow-md bg-white"

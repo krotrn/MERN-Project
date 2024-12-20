@@ -87,7 +87,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between min-h-screen p-4 bg-gray-900 text-white">
+    <div className="flex flex-row items-center justify-between min-h-full p-4 bg-gray-900 text-white">
       {/* Left Section */}
       <div className="w-full lg:w-1/2 mb-0 px-4">
         <h1 className="text-4xl font-bold mb-6 text-teal-400">Create an Account</h1>
@@ -192,7 +192,7 @@ const Register = () => {
         </form>
 
         {/* Login Link */}
-        <p className="mt-4 text-center">
+        <p className="mt-4">
           Already have an account?{" "}
           <Link
             to={redirect ? `/login?redirect=${redirect}` : "/login"}

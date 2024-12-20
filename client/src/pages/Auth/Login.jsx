@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between min-h-screen bg-gray-900 text-white p-4">
+    <div className="flex flex-row items-center justify-between h-full min-h-screen bg-gray-900 text-white p-4">
       {/* Left Section */}
       <div className="w-full lg:w-1/2 px-4">
         <h1 className="text-4xl font-bold mb-6 text-teal-400">Welcome Back</h1>

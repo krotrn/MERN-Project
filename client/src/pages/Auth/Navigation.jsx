@@ -44,7 +44,10 @@ const Navigation = () => {
 
   return (
     <div className="sticky flex w-[40%] left-0 right-0 bottom-10 mx-auto justify-center items-end z-50">
-      <div className="bg-gray-900 border w-full min-w-fit p-6 rounded-lg shadow-xl">
+      <div
+        className="bg-gradient-to-r from-gray-800 via-gray-900 to-black border border-gray-700 w-full min-w-fit p-6 rounded-3xl shadow-2xl backdrop-blur-lg bg-opacity-60"
+        style={{ backdropFilter: "blur(10px)" }}
+      >
         <section className="flex justify-between space-x-4 py-2">
           {/* Navigation Links */}
           <div className="flex space-x-8">
@@ -95,14 +98,14 @@ const Navigation = () => {
               </button>
               {dropdownOpen && (
                 <ul
-                  className="absolute right-0 mt-2 bg-gray-800 text-gray-200 rounded-lg shadow-lg w-48 divide-y divide-gray-700"
+                  className="absolute right-0 mt-2 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-gray-200 rounded-lg shadow-lg w-48 divide-y divide-gray-600"
                   role="menu"
                 >
                   {userInfo?.data?.isAdmin && (
                     <li>
                       <Link
                         to="/admin/movies/dashboard"
-                        className="block px-4 py-2 hover:bg-teal-500 hover:text-white transition-colors"
+                        className="block px-4 py-2 hover:bg-teal-500 hover:text-white transition-colors rounded-t-lg"
                         role="menuitem"
                         onClick={() => setDropdownOpen(false)}
                       >
@@ -123,7 +126,7 @@ const Navigation = () => {
                   <li>
                     <button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 hover:bg-teal-500 hover:text-white transition-colors"
+                      className="block w-full text-left px-4 py-2 hover:bg-teal-500 hover:text-white transition-colors rounded-b-lg"
                       role="menuitem"
                     >
                       Logout
