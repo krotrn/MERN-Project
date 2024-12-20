@@ -91,10 +91,11 @@ const CreateMovie = () => {
 
         {/* Title */}
         <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-medium">Title</label>
+          <label htmlFor="title" className="block mb-2 text-gray-700 font-medium">Title</label>
           <input
             type="text"
             name="title"
+            id="title"
             value={movieData.title}
             onChange={handleChange}
             className="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
@@ -106,10 +107,11 @@ const CreateMovie = () => {
 
         {/* Year */}
         <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-medium">Year</label>
+          <label htmlFor="year" className="block mb-2 text-gray-700 font-medium">Year</label>
           <input
             type="number"
             name="year"
+            id="year"
             value={movieData.year}
             onChange={handleChange}
             className="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
@@ -123,9 +125,10 @@ const CreateMovie = () => {
 
         {/* Detail */}
         <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-medium">Detail</label>
+          <label htmlFor="detail" className="block mb-2 text-gray-700 font-medium">Detail</label>
           <textarea
             name="detail"
+            id="detail"
             value={movieData.detail}
             onChange={handleChange}
             autoComplete="detail"
@@ -138,10 +141,11 @@ const CreateMovie = () => {
 
         {/* Cast */}
         <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-medium">Cast (comma-separated)</label>
+          <label htmlFor="cast" className="block mb-2 text-gray-700 font-medium">Cast (comma-separated)</label>
           <input
             type="text"
             name="cast"
+            id="cast"
             value={movieData.cast.join(", ")}
             onChange={handleCastChange}
             autoComplete="cast"
@@ -153,9 +157,10 @@ const CreateMovie = () => {
 
         {/* Genre */}
         <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-medium">Genre</label>
+          <label htmlFor="genre" className="block mb-2 text-gray-700 font-medium">Genre</label>
           <select
             name="genre"
+            id="genre"
             value={movieData.genre}
             onChange={handleChange}
             autoComplete="genre"
@@ -175,9 +180,10 @@ const CreateMovie = () => {
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-medium">Upload Image</label>
+          <label htmlFor="image" className="block mb-2 text-gray-700 font-medium">Upload Image</label>
           <input
             type="file"
+            id="image"
             accept="image/*"
             onChange={handleImageChange}
             autoComplete="image"
