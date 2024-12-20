@@ -130,7 +130,7 @@ movieSchema.pre("save", async function (next) {
     this.cast = this.cast.map((item) => item.trim());
   }
   if(this.isModified("genre")) {
-    this.genre = this.genre.trim();
+    this.genre = this.genre;
   }
   next();
 });

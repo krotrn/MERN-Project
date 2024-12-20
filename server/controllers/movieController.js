@@ -4,7 +4,7 @@ import Movie from "../models/Movie.js";
 const createMovie = asyncHandler(async (req, res) => {
   const { title, image, year, genre, detail, cast, reviews } = req.body;
 
-  if (!title.trim() || !year || !genre.trim() || !detail.trim()) {
+  if (!title.trim() || !year || !genre || !detail.trim()) {
     return res.status(400).json({
       status: "fail",
       message: "Title, Year, Genre, and Detail are required fields.",
@@ -35,6 +35,7 @@ const createMovie = asyncHandler(async (req, res) => {
 
     const newMovie = new Movie(newMovieData);
     const savedMovie = await newMovie.save();
+    console.log(savedMovie)
 
     res.status(201).json({
       status: "success",

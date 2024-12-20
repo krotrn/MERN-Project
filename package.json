@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
     "client": "cd client && npm run dev",
     "server": "nodemon server/index.js"
   },
