@@ -34,7 +34,7 @@ const CreateMovie = () => {
   };
 
   const handleCastChange = (e) => {
-    const castArray = e.target.value.split(",").map((name) => name.trim());
+    const castArray = e.target.value.split(",");
     setMovieData((prev) => ({ ...prev, cast: castArray }));
   };
 
