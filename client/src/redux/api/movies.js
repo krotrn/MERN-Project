@@ -27,7 +27,7 @@ export const movieApiSlice = apiSlice.injectEndpoints({
         if (year) params.append("year", year);
         if (genre) params.append("genre", genre);
 
-        return `${MOVIE_URL}?${params.toString()}`;
+        return `${MOVIE_URL}/all-movies?${params.toString()}`;
       },
       providesTags: ["Movies"], // Cache the movies data
     }),
