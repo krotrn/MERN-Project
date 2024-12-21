@@ -174,7 +174,7 @@ const CreateMovie = () => {
             type="text"
             name="cast"
             id="cast"
-            value={movieData.cast.join(", ")}
+            value={movieData.cast}
             onChange={handleCastChange}
             autoComplete="cast"
             className="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-400"

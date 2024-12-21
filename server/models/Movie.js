@@ -80,7 +80,7 @@ const movieSchema = new Schema(
     updatedAt: {
       type: Date,
       default: new Date().toISOString(),
-    }, 
+    },
     numReviews: {
       type: Number,
       default: 0,
@@ -88,20 +88,15 @@ const movieSchema = new Schema(
     rating: {
       type: Number,
       default: 0,
-    }
+    },
   },
   { timestamps: true }
 );
-
-
-
 
 // Virtual field for last fetched date
 movieSchema.virtual("fetchedAt").get(function () {
   return new Date().toISOString();
 });
-
-
 
 // Middleware to auto-update fields (if needed)
 movieSchema.pre("save", async function (next) {
@@ -111,8 +106,10 @@ movieSchema.pre("save", async function (next) {
       .toLowerCase()
       .replace(/\b\w/g, (char) => char.toUpperCase());
   }
-  if(this.isModified("rating")) {
-    this.rating = this.reviews.reduce((acc, item) => item.rating + acc, 0) / this.reviews.length;
+  if (this.isModified("rating")) {
+    this.rating =
+      this.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      this.reviews.length;
   }
   if (this.isModified("updatedAt")) {
     this.updatedAt = new Date().toISOString();
@@ -120,16 +117,18 @@ movieSchema.pre("save", async function (next) {
   if (!this.createdAt) {
     this.createdAt = new Date().toISOString();
   }
-  if(this.isModified("reviews")) {
+  if (this.isModified("reviews")) {
     this.numReviews = this.reviews.length;
   }
   if (this.isModified("detail")) {
     this.detail = this.detail.trim();
   }
-  if(this.isModified("cast")) {
-    this.cast = this.cast.map((item) => item.trim());
+  if (this.isModified("cast")) {
+    this.cast = this.cast
+      .map((item) => item.trim())
+      .filter((cast) => cast !== "");
   }
-  if(this.isModified("genre")) {
+  if (this.isModified("genre")) {
     this.genre = this.genre;
   }
   next();
