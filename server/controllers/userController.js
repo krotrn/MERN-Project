@@ -82,7 +82,7 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   }
 
-  const existingUser = await User.findOne({ email: email.toLowerCase() });
+  const existingUser = await User.findOne({ email: email.toLowerCase() }).lean();
   if (!existingUser) {
     return res.status(404).json({
       status: "error",
@@ -140,7 +140,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 // Get current user profile
 const getCurrentUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password").lean();
+  const user = await User.findById(req.User._id).select("-password").lean();
 
   if (!user) {
     return res.status(404).json({
@@ -157,7 +157,7 @@ const getCurrentUserProfile = asyncHandler(async (req, res) => {
 
 // Update current user profile
 const updateCurrentUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.User._id);
 
   if (!user) {
     return res.status(404).json({

@@ -30,7 +30,9 @@ const GenreList = () => {
   const handleCreateGenre = async (e) => {
     e.preventDefault();
     if (!name.trim() || name.length > 50) {
-      toast.error("Genre name is required and must be less than 50 characters.");
+      toast.error(
+        "Genre name is required and must be less than 50 characters."
+      );
       return;
     }
 
@@ -48,7 +50,9 @@ const GenreList = () => {
   const handleUpdateGenre = async (e) => {
     e.preventDefault();
     if (!updatingName.trim() || updatingName.length > 50) {
-      toast.error("Genre name is required and must be less than 50 characters.");
+      toast.error(
+        "Genre name is required and must be less than 50 characters."
+      );
       return;
     }
 
@@ -67,16 +71,14 @@ const GenreList = () => {
   };
 
   const handleDeleteGenre = async () => {
-    if (window.confirm("Are you sure you want to delete this genre?")) {
-      try {
-        await deleteGenre({ id: selectedGenre._id }).unwrap();
-        toast.success("Genre deleted successfully!");
-        closeModal();
-        refetch();
-      } catch (error) {
-        console.error("Delete Genre Error:", error);
-        toast.error(error.data?.message || "Failed to delete genre.");
-      }
+    try {
+      await deleteGenre({ id: selectedGenre._id }).unwrap();
+      toast.success("Genre deleted successfully!");
+      closeModal();
+      refetch();
+    } catch (error) {
+      console.error("Delete Genre Error:", error);
+      toast.error(error.data?.message || "Failed to delete genre.");
     }
   };
 
@@ -84,7 +86,9 @@ const GenreList = () => {
 
   return (
     <div className="p-6 min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-100 to-gray-300 backdrop-blur-md rounded-lg shadow-2xl">
-      <h1 className="text-4xl font-extrabold mb-8 text-teal-700 drop-shadow-lg">Genre Management</h1>
+      <h1 className="text-4xl font-extrabold mb-8 text-teal-700 drop-shadow-lg">
+        Genre Management
+      </h1>
 
       <form
         onSubmit={handleCreateGenre}
@@ -125,14 +129,18 @@ const GenreList = () => {
             </button>
           ))
         ) : (
-          <p className="text-gray-500">No genres available. Please add a new genre.</p>
+          <p className="text-gray-500">
+            No genres available. Please add a new genre.
+          </p>
         )}
       </div>
 
       {modalVisible && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white bg-opacity-95 p-8 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-lg border border-teal-500">
-            <h2 className="text-2xl font-bold mb-6 text-teal-600 drop-shadow-sm">Edit Genre</h2>
+            <h2 className="text-2xl font-bold mb-6 text-teal-600 drop-shadow-sm">
+              Edit Genre
+            </h2>
             <form onSubmit={handleUpdateGenre} className="space-y-6">
               <input
                 type="text"

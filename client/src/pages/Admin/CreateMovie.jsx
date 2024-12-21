@@ -18,9 +18,11 @@ const CreateMovie = () => {
     cast: [],
   });
   const [selectedImage, setSelectedImage] = useState(null);
-  const [createMovie, { isLoading: isCreatingMovie }] = useCreateMovieMutation();
+  const [createMovie, { isLoading: isCreatingMovie }] =
+    useCreateMovieMutation();
   const [uploadImage, { isLoading: isUploading }] = useUploadImageMutation();
-  const { data: fetchGenres, isLoading: isFetchingGenre } = useFetchGenresQuery();
+  const { data: fetchGenres, isLoading: isFetchingGenre } =
+    useFetchGenresQuery();
 
   const genres = fetchGenres?.data || [];
 
@@ -45,24 +47,27 @@ const CreateMovie = () => {
     e.preventDefault();
 
     // Basic validation
-    if (!movieData.title || !movieData.year || !movieData.genre || !movieData.detail || !selectedImage) {
+    if (
+      !movieData.title ||
+      !movieData.year ||
+      !movieData.genre ||
+      !movieData.detail ||
+      !selectedImage
+    ) {
       toast.error("Please fill in all required fields.");
       return;
     }
 
     try {
-      // Upload the image first
-      let imagePath = null;
-      if (selectedImage) {
-        const formData = new FormData();
-        formData.append("image", selectedImage);
+      // Upload the image
+      const formData = new FormData();
+      formData.append("image", selectedImage);
 
-        const uploadResponse = await uploadImage(formData).unwrap();
-        imagePath = uploadResponse?.imagePath;
+      const uploadResponse = await uploadImage(formData).unwrap();
+      const imagePath = uploadResponse?.imagePath;
 
-        if (!imagePath) {
-          throw new Error("Failed to upload image.");
-        }
+      if (!imagePath) {
+        throw new Error("Failed to upload image.");
       }
 
       // Create the movie
@@ -77,7 +82,9 @@ const CreateMovie = () => {
       setSelectedImage(null);
     } catch (error) {
       console.error("Error creating movie:", error);
-      toast.error(error?.data?.message || "Failed to create movie. Please try again.");
+      toast.error(
+        error?.data?.message || "Failed to create movie. Please try again."
+      );
     }
   };
 
@@ -87,11 +94,18 @@ const CreateMovie = () => {
         onSubmit={handleCreateMovie}
         className="w-full max-w-2xl p-6 border rounded-lg shadow-md bg-white"
       >
-        <h2 className="text-teal-600 text-3xl font-semibold mb-6 text-center">Create Movie</h2>
+        <h2 className="text-teal-600 text-3xl font-semibold mb-6 text-center">
+          Create Movie
+        </h2>
 
         {/* Title */}
         <div className="mb-4">
-          <label htmlFor="title" className="block mb-2 text-gray-700 font-medium">Title</label>
+          <label
+            htmlFor="title"
+            className="block mb-2 text-gray-700 font-medium"
+          >
+            Title
+          </label>
           <input
             type="text"
             name="title"
@@ -107,7 +121,12 @@ const CreateMovie = () => {
 
         {/* Year */}
         <div className="mb-4">
-          <label htmlFor="year" className="block mb-2 text-gray-700 font-medium">Year</label>
+          <label
+            htmlFor="year"
+            className="block mb-2 text-gray-700 font-medium"
+          >
+            Year
+          </label>
           <input
             type="number"
             name="year"
@@ -125,7 +144,12 @@ const CreateMovie = () => {
 
         {/* Detail */}
         <div className="mb-4">
-          <label htmlFor="detail" className="block mb-2 text-gray-700 font-medium">Detail</label>
+          <label
+            htmlFor="detail"
+            className="block mb-2 text-gray-700 font-medium"
+          >
+            Detail
+          </label>
           <textarea
             name="detail"
             id="detail"
@@ -134,14 +158,18 @@ const CreateMovie = () => {
             autoComplete="detail"
             className="border rounded px-4 py-2 w-full h-32 focus:outline-none focus:ring-2 focus:ring-teal-400"
             placeholder="Enter movie description"
-
             required
           ></textarea>
         </div>
 
         {/* Cast */}
         <div className="mb-4">
-          <label htmlFor="cast" className="block mb-2 text-gray-700 font-medium">Cast (comma-separated)</label>
+          <label
+            htmlFor="cast"
+            className="block mb-2 text-gray-700 font-medium"
+          >
+            Cast (comma-separated)
+          </label>
           <input
             type="text"
             name="cast"
@@ -157,7 +185,12 @@ const CreateMovie = () => {
 
         {/* Genre */}
         <div className="mb-4">
-          <label htmlFor="genre" className="block mb-2 text-gray-700 font-medium">Genre</label>
+          <label
+            htmlFor="genre"
+            className="block mb-2 text-gray-700 font-medium"
+          >
+            Genre
+          </label>
           <select
             name="genre"
             id="genre"
@@ -180,7 +213,12 @@ const CreateMovie = () => {
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label htmlFor="image" className="block mb-2 text-gray-700 font-medium">Upload Image</label>
+          <label
+            htmlFor="image"
+            className="block mb-2 text-gray-700 font-medium"
+          >
+            Upload Image
+          </label>
           <input
             type="file"
             id="image"
