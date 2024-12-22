@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import {
   useCreateMovieMutation,
@@ -25,6 +25,17 @@ const CreateMovie = () => {
     useFetchGenresQuery();
 
   const genres = fetchGenres?.data || [];
+  const ImagePicker = useRef();
+
+  
+  const handlePickClick = () => {
+    ImagePicker.current.click()
+  }
+
+  const handlePreviewImage = () => {
+    if (selectedImage) return URL.createObjectURL(selectedImage);
+    return movieData.image ? `${movieData.image}` : "";
+  };
 
   const handleChange = (e) => {
     setMovieData((prev) => ({
@@ -212,31 +223,25 @@ const CreateMovie = () => {
         </div>
 
         {/* Image Upload */}
-        <div className="mb-4">
-          <label
-            htmlFor="image"
-            className="block mb-2 text-gray-700 font-medium"
-          >
+        <div className="mb-6">
+          <label htmlFor="image" className="block text-gray-700 mb-2">
             Upload Image
           </label>
           <input
             type="file"
-            id="image"
             accept="image/*"
+            id="image"
             onChange={handleImageChange}
-            autoComplete="image"
-            className="block w-full text-gray-700 border rounded px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-400"
-            required
+            ref={ImagePicker}
+            className="hidden"
           />
-          {selectedImage && (
-            <div className="mt-3">
-              <p className="text-sm text-gray-600">Selected Image:</p>
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                alt="Selected Preview"
-                className="w-32 h-32 object-cover border rounded mt-2"
-              />
-            </div>
+          <button className='px-2 py-2 bg-[#a4abb9] border cursor-pointer hover:bg-[#b3b9c6] ' type="button" onClick={handlePickClick}>Pick an Image</button>
+          {handlePreviewImage() && (
+            <img
+              src={handlePreviewImage()}
+              alt="Preview Image"
+              className="mt-4 w-32 h-32 object-cover rounded border"
+            />
           )}
         </div>
 
