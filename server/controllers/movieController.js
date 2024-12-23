@@ -35,7 +35,7 @@ const createMovie = asyncHandler(async (req, res) => {
 
     const newMovie = new Movie(newMovieData);
     const savedMovie = await newMovie.save();
-    console.log(savedMovie)
+    console.log(savedMovie);
 
     res.status(201).json({
       status: "success",

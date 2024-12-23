@@ -1,6 +1,11 @@
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import {
+  RouterProvider,
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 import store from "./redux/store.js";
 import App from "./App.jsx";
 import "./index.css";
@@ -24,16 +29,15 @@ const router = createBrowserRouter(
       <Route index element={<Home />} /> {/* Default route */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="" element={<PrivateRoute />} >
+      <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="/" element={<AdminRoute />}>
-        <Route path="/admin/movies/genre" element = {<GenreList />} />
-        <Route path="/admin/movies/create" element = {<CreateMovie />} />
-        <Route path="/admin/movies-list" element = {<AdminMoviesList />} />
-        <Route path="/admin/movies/update/:id" element = {<UpdateMovie />} />
+        <Route path="/admin/movies/genre" element={<GenreList />} />
+        <Route path="/admin/movies/create" element={<CreateMovie />} />
+        <Route path="/admin/movies-list" element={<AdminMoviesList />} />
+        <Route path="/admin/movies/update/:id" element={<UpdateMovie />} />
       </Route>
-
     </Route>
   )
 );

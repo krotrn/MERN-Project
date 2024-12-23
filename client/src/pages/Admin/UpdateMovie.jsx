@@ -5,6 +5,7 @@ import {
   useGetSpecificMovieQuery,
   useUpdateMovieMutation,
   useUploadImageMutation,
+  useDeleteImageMutation,
 } from "../../redux/api/movies.js";
 
 import { useFetchGenresQuery } from "../../redux/api/genre";
@@ -12,7 +13,7 @@ import Loader from "../../components/Loader.jsx";
 import { toast } from "react-toastify";
 
 const UpdateMovie = () => {
-  const ImagePicker = useRef()
+  const ImagePicker = useRef();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -27,6 +28,8 @@ const UpdateMovie = () => {
   const [updateMovie, { isLoading: isUpdating }] = useUpdateMovieMutation();
   const [uploadImage, { isLoading: isUploading }] = useUploadImageMutation();
   const [deleteMovie, { isLoading: isDeleting }] = useDeleteMovieMutation();
+  const [deleteImage, { isLoading: isDeletingImage }] =
+    useDeleteImageMutation();
 
   const [movieData, setMovieData] = useState({
     title: "",
@@ -71,8 +74,8 @@ const UpdateMovie = () => {
   };
 
   const handlePickClick = () => {
-    ImagePicker.current.click()
-  }
+    ImagePicker.current.click();
+  };
 
   const handlePreviewImage = () => {
     if (selectedImage) return URL.createObjectURL(selectedImage);
@@ -121,6 +124,7 @@ const UpdateMovie = () => {
 
   const handleDelete = async () => {
     try {
+      await deleteImage(movie.image);
       await deleteMovie(id).unwrap();
       toast.success("Movie deleted successfully!");
       navigate("/admin/movies-list");
@@ -246,7 +250,13 @@ const UpdateMovie = () => {
             ref={ImagePicker}
             className="hidden"
           />
-          <button className='px-2 py-2 bg-[#a4abb9] border cursor-pointer hover:bg-[#b3b9c6] ' type="button" onClick={handlePickClick}>Pick an Image</button>
+          <button
+            className="px-2 py-2 bg-[#a4abb9] border cursor-pointer hover:bg-[#b3b9c6] "
+            type="button"
+            onClick={handlePickClick}
+          >
+            Pick an Image
+          </button>
           {handlePreviewImage() && (
             <img
               src={handlePreviewImage()}
@@ -267,10 +277,10 @@ const UpdateMovie = () => {
           <button
             type="button"
             onClick={handleDelete}
-            disabled={isDeleting}
+            disabled={isDeleting || isDeletingImage}
             className="flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
           >
-            {isDeleting ? <Loader /> : "Delete Movie"}
+            {isDeleting || isDeletingImage ? <Loader /> : "Delete Movie"}
           </button>
         </div>
       </form>

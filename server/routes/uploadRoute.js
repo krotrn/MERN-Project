@@ -49,6 +49,36 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
 });
 
+// Route for deleting an image
+router.delete("/:filename", (req, res) => {
+  const { filename } = req.params;
+  const filePath = path.join(uploadDir, filename);
+
+  // Check if the file exists
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Image not found.",
+    });
+  }
+
+  // Delete the file
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error("Delete Error:", err.message);
+      return res.status(500).json({
+        status: "error",
+        message: "An error occurred while deleting the image.",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Image deleted successfully.",
+    });
+  });
+});
+
 // Route for single image upload
 router.post("/", upload.single("image"), (req, res) => {
   if (!req.file) {

@@ -33,7 +33,8 @@ const AdminMoviesList = () => {
     setPage(1); // Reset to the first page when filters change
   };
 
-  const { data: fetchGenres, isLoading: isFetchingGenre } = useFetchGenresQuery();
+  const { data: fetchGenres, isLoading: isFetchingGenre } =
+    useFetchGenresQuery();
   const genres = fetchGenres?.data || [];
 
   return (
@@ -118,7 +119,8 @@ const AdminMoviesList = () => {
         ) : (
           <div>
             <p className="text-gray-600 mb-4">
-              Total Movies Found: <span className="font-semibold">{totalMovies}</span>
+              Total Movies Found:{" "}
+              <span className="font-semibold">{totalMovies}</span>
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {movies.map((movie) => (
