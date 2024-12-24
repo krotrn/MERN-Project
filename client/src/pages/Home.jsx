@@ -1,7 +1,13 @@
-const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+import Header from "./Movies/Header";
+import MoviesContainerPage from "./Movies/MoviesContainerPage";
 
-export default Home
+const Home = () => {
+  return <>
+    <Header />
+    <section>
+      <MoviesContainerPage />
+    </section>
+  </>;
+};
+
+export default Home;
