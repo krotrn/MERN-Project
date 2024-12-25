@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between h-full min-h-screen bg-gray-900 text-white p-4">
+    <div className="flex flex-row items-center justify-between h-full min-h-screen bg-white text-gray-900 p-4">
       {/* Left Section */}
       <div className="w-full lg:w-1/2 px-4">
         <h1 className="text-4xl font-bold mb-6 text-teal-400">Welcome Back</h1>
@@ -61,7 +61,7 @@ const Login = () => {
         </p>
         <form
           onSubmit={submitHandler}
-          className="bg-gray-800 p-8 rounded-lg shadow-md space-y-6"
+          className="bg-white text-gray-900 p-8 rounded-lg shadow-md space-y-6"
         >
           {/* Email Field */}
           <div>
@@ -75,7 +75,7 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your email"
               value={email}
               onChange={handleChange}
@@ -96,7 +96,7 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your password"
               value={password}
               onChange={handleChange}

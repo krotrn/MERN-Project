@@ -28,12 +28,12 @@ const MoviesContainerPage = () => {
   });
   const topMovies = topResponse?.data || [];
 
-  // Fetch Random Movies // to be fix
   const { data: randomResponse, isLoading: isLoadingRandom } =
     useGetAllMoviesQuery({
       ...baseFilters,
       sort: "createdAt",
       order: "asc",
+      random:true
     });
   const randomMovies = randomResponse?.data || [];
 

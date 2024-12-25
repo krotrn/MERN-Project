@@ -87,7 +87,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between min-h-full p-4 bg-gray-900 text-white">
+    <div className="flex flex-row items-center justify-between min-h-full p-4 bg-white text-gray-900">
       {/* Left Section */}
       <div className="w-full lg:w-1/2 mb-0 px-4">
         <h1 className="text-4xl font-bold mb-6 text-teal-400">Create an Account</h1>
@@ -96,7 +96,7 @@ const Register = () => {
         </p>
         <form
           onSubmit={submitHandler}
-          className="bg-gray-800 p-8 rounded-lg shadow-md space-y-6"
+          className="bg-white text-gray-900 p-8 rounded-lg shadow-md space-y-6"
         >
           <div>
             <label htmlFor="username" className="block text-sm font-medium mb-2 text-teal-300">
@@ -106,7 +106,7 @@ const Register = () => {
               type="text"
               id="username"
               name="username"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your username"
               value={username}
               onChange={handleChange}
@@ -123,7 +123,7 @@ const Register = () => {
               type="email"
               id="email"
               name="email"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your email"
               value={email}
               onChange={handleChange}
@@ -140,7 +140,7 @@ const Register = () => {
               type="password"
               id="password"
               name="password"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your password"
               value={password}
               onChange={handleChange}
@@ -171,7 +171,7 @@ const Register = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Re-enter your password"
               value={confirmPassword}
               onChange={handleChange}
