@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body{
-    background: #0f0f0f;
-    color: #fff;
-}
-
-input,textarea{
-    color: #000;
-}
-
-select option{
-    color: #000;
+html{
+  scroll-behavior: smooth;
 }
