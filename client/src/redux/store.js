@@ -2,21 +2,21 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
 import authReducer from "./features/auth/authSlice.js";
 import { apiSlice } from "./api/apiSlice.js";
+import moviesReducer from "./features/movies/moviesSlice.js";
 
 // Create Redux store
 const store = configureStore({
-  // Reducer configuration
   reducer: {
-    auth: authReducer, // Handles authentication state
-    [apiSlice.reducerPath]: apiSlice.reducer, // Manages API caching and state
+    auth: authReducer, // Authentication state
+    [apiSlice.reducerPath]: apiSlice.reducer, // API slice for caching
+    movies: moviesReducer, // Movies state
   },
-  // Middleware configuration
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
   devTools: true, // Enable Redux DevTools
 });
 
-// Enable automatic refetching for API queries when the focus or connection changes
+// Enable automatic refetching for API queries
 setupListeners(store.dispatch);
 
 export default store;

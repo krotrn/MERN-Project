@@ -8,7 +8,8 @@ const SliderUtil = ({data}) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 300,
+    lazyLoad: "ondemand",
     slidesToShow: 4,
     slidesToScroll: 2,
     responsive: [
@@ -48,7 +49,7 @@ const SliderUtil = ({data}) => {
   return (
     <div className="my-6">
       <Slider {...settings}>
-        {data.map((movie) => (
+        {data?.map((movie) => (
           <div key={movie._id} className="px-2">
             <MovieCard movie={movie} />
           </div>

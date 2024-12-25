@@ -40,7 +40,5 @@ genreSchema.virtual("displayName").get(function () {
     .join(" ");
 });
 
-// Indexing: Add a unique index on `name` for optimized queries
-genreSchema.index({ name: 1 }, { unique: true });
 
 export default model("Genre", genreSchema);

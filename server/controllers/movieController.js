@@ -56,11 +56,12 @@ const getAllMovies = asyncHandler(async (req, res) => {
   try {
     const {
       page = 1,
-      limit = 10,
+      limit,
       sort = "createdAt",
       order = "desc",
       year,
       genre,
+      random,
     } = req.query;
 
     const query = {};
@@ -68,15 +69,23 @@ const getAllMovies = asyncHandler(async (req, res) => {
     if (genre) query.genre = genre;
 
     const pageNumber = Number(page);
-    const pageSize = Number(limit);
-    const skip = (pageNumber - 1) * pageSize;
+    const pageSize = limit ? Number(limit) : undefined;
+    const skip = pageSize ? (pageNumber - 1) * pageSize : 0;
 
-    const sortOrder = order === "asc" ? 1 : -1;
-
-    const movies = await Movie.find(query)
-      .sort({ [sort]: sortOrder })
-      .skip(skip)
-      .limit(pageSize);
+    let movies;
+    if (random) {
+      movies = await Movie.aggregate([
+      { $match: query },
+      { $sample: { size: pageSize || 10 } },
+      ]);
+    } else {
+      const sortOrder = order === "asc" ? 1 : -1;
+      const moviesQuery = Movie.find(query).sort({ [sort]: sortOrder }).skip(skip);
+      if (pageSize) {
+      moviesQuery.limit(pageSize);
+      }
+      movies = await moviesQuery;
+    }
 
     const totalMovies = await Movie.countDocuments(query);
 
@@ -284,7 +293,7 @@ const deleteReview = asyncHandler(async (req, res) => {
 
 const getNewMovies = asyncHandler(async (req, res) => {
   try {
-    const newMovies = await Movie.find()
+    const newMovies = await Movie.find({})
       .sort({ createdAt: -1 })
       .limit(10)
       .lean();
@@ -293,7 +302,11 @@ const getNewMovies = asyncHandler(async (req, res) => {
       data: newMovies,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error fetching movies:", error);
+    res.status(500).json({ 
+      status: "error", 
+      message: "Failed to fetch movies. Please try again later." 
+    });
   }
 });
 

@@ -37,8 +37,6 @@ userSchema.virtual("role").get(function () {
   return this.isAdmin ? "Admin" : "User";
 });
 
-// Indexing: Add an index for efficient email lookups
-userSchema.index({ email: 1 });
 
 // User Model
 const User = mongoose.model("User", userSchema);

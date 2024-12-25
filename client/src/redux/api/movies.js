@@ -133,9 +133,6 @@ export const {
   useAddMovieReviewMutation,
   useDeleteMovieMutation,
   useDeleteReviewMutation,
-  useGetNewMoviesQuery,
-  useGetTopMoviesQuery,
-  useGetRandomMoviesQuery,
   useUploadImageMutation,
   useDeleteImageMutation
 } = movieApiSlice;
