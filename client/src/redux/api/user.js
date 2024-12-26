@@ -47,6 +47,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"], // Invalidate cache for User profile
     }),
+
+    getUsers: builder.query({
+      query: () => ({
+        url: `${USER_URL}/all-users`,
+        method: "GET"
+      }),
+    }),
   }),
 });
 
@@ -56,4 +63,5 @@ export const {
   useGetUserQuery,
   useLogoutMutation,
   useUpdateProfileMutation,
+  useGetUsersQuery,
 } = userApiSlice;

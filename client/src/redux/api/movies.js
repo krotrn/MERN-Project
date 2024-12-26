@@ -77,7 +77,7 @@ export const movieApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
         body: { reviewId },
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Movies", id }], // Invalidate the specific movie cache
+      invalidatesTags: (result, error, { id }) => [{ type: "Movies", id }],
     }),
 
     // Fetch new movies

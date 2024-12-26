@@ -1,11 +1,11 @@
 import express from "express";
 import {
-    createUser,
-    loginUser,
-    logCurrentUserOut,
-    getAllUsers,
-    getCurrentUserProfile,
-    updateCurrentUserProfile
+  createUser,
+  loginUser,
+  logCurrentUserOut,
+  getAllUsers,
+  getCurrentUserProfile,
+  updateCurrentUserProfile,
 } from "../controllers/userController.js";
 
 // middlewares
@@ -18,28 +18,23 @@ const router = express.Router();
 
 // Route to create a new user (registration)
 router
-    .route("/register")
-    .post(
-        validateRequiredFields(["username", "email", "password"]),
-        createUser
-    )
-    .get(authenticate, authorizeAdmin, getAllUsers);
+  .route("/register")
+  .post(validateRequiredFields(["username", "email", "password"]), createUser);
+router.route("/all-users").get(authenticate, authorizeAdmin, getAllUsers);
 
 // Route to login a user (authentication)
-router
-    .post(
-    "/login",
-    // rateLimit,
-    validateRequiredFields(["email", "password"]),
-    loginUser
+router.post(
+  "/login",
+  // rateLimit,
+  validateRequiredFields(["email", "password"]),
+  loginUser
 );
 
-router
-    .post("/logout", logCurrentUserOut);
+router.post("/logout", logCurrentUserOut);
 
 router
-    .route('/profile')
-    .get(authenticate, getCurrentUserProfile)
-    .patch(authenticate, updateCurrentUserProfile);
+  .route("/profile")
+  .get(authenticate, getCurrentUserProfile)
+  .patch(authenticate, updateCurrentUserProfile);
 
 export default router;
