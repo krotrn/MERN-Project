@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser"; // for parsing cookies
 import dotenv from "dotenv"; // for environment variables
+import cors from "cors"; // for cross-origin requests
 import helmet from "helmet"; // for security
 import path from "path";
 import { fileURLToPath } from "url";
@@ -32,6 +33,13 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use(express.json()); // for parsing application/json
 app.use(cookieParser()); // for parsing cookies
 
+
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://mern-kr.vercel.app"], 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use(helmet()); // for security
 
