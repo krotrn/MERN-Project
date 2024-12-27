@@ -41,6 +41,7 @@ const MoviesContainerPage = () => {
   const { data: genreResponse, isLoading: isLoadingGenres } =
     useFetchGenresQuery();
   const genres = genreResponse?.data || [];
+  console.log(genres)
 
   // State for Selected Genre
   const [selectedGenre, setSelectedGenre] = useState(null);
@@ -57,14 +58,14 @@ const MoviesContainerPage = () => {
   return (
     <div className="flex flex-col lg:flex-row lg:justify-between items-center p-4 lg:p-8">
       {/* Genre Navigation */}
-      <nav className="flex flex-row lg:flex-col w-full lg:w-1/4 mb-8 lg:mb-0 lg:mr-8">
+      <nav className="flex flex-row justify-center md:self-start lg:flex-col w-full lg:w-1/4 mb-8 lg:mb-0 lg:mr-8">
         {isLoadingGenres ? (
           <Loader />
         ) : (
           genres.map((genre) => (
             <button
               key={genre._id}
-              className={`transition duration-300 ease-in-out hover:bg-gray-200 hover:text-black block p-3 rounded text-lg mb-2 ${
+              className={`hover:transform hover:scale-105 transition-transform duration-500 ease-in-out hover:bg-gray-200 hover:text-black block p-3 rounded text-lg mb-2 ${
                 selectedGenre === genre._id ? "bg-teal-100 font-bold" : ""
               }`}
               onClick={() => handleGenreClick(genre._id)}

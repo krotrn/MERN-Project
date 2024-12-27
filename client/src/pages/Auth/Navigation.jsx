@@ -72,7 +72,7 @@ const Navigation = () => {
 
           {/* User Section */}
           {userInfo?.data ? (
-            <div className="flex space-x-8" ref={dropdownRef}>
+            <div className="flex space-x-8 relative" ref={dropdownRef}>
               <button
                 onClick={toggleDropdownOpen}
                 className="text-gray-200 flex items-center focus:outline-none"
@@ -98,7 +98,7 @@ const Navigation = () => {
               </button>
               {dropdownOpen && (
                 <ul
-                  className="absolute right-0 mt-2 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-gray-200 rounded-lg shadow-lg w-48 divide-y divide-gray-600"
+                  className="absolute right-0 bottom-full hover:transform hover:scale-105 transition-transform duration-500 mb-2 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-gray-200 rounded-lg shadow-lg w-48 divide-y divide-gray-600"
                   role="menu"
                 >
                   {userInfo?.data?.isAdmin && (
