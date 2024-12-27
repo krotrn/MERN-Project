@@ -1,8 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser"; // for parsing cookies
 import dotenv from "dotenv"; // for environment variables
-import cors from "cors"; // for cross-origin requests
-import morgan from "morgan"; // for logging
 import helmet from "helmet"; // for security
 import path from "path";
 import { fileURLToPath } from "url";
@@ -24,6 +22,7 @@ connectDB();
 // create express app
 const app = express();
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT;
@@ -34,14 +33,6 @@ app.use(express.json()); // for parsing application/json
 app.use(cookieParser()); // for parsing cookies
 
 
-// app.use(
-//   cors({
-//     origin: ["https://mern-kr.vercel.app", "http://localhost:3000"],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//   })
-// );
-
-app.use(morgan("dev")); // for logging
 app.use(helmet()); // for security
 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
