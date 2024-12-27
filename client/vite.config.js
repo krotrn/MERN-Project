@@ -7,12 +7,12 @@ export default defineConfig({
     server: {
         proxy: {
             "/api/": {
-                target: import.meta.env.BASE_URL,
+                target: "https://mern-project-k8u0.onrender.com",
                 changeOrigin: true, // for CORS
                 secure: false, // for using HTTP instead of HTTPS
             },
             "/uploads/": {
-                target: import.meta.env.BASE_URL,
+                target: "import.meta.env.BASE_URL",
                 changeOrigin: true,
                 secure: false,
             },
