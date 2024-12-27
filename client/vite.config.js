@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import {API_URL} from './src/redux/constants.js'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -7,12 +8,12 @@ export default defineConfig({
     server: {
         proxy: {
             "/api/": {
-                target: "https://mern-project-k8u0.onrender.com",
+                target: API_URL,
                 changeOrigin: true,
                 secure: false,
             },
             "/uploads/": {
-                target: "https://mern-project-k8u0.onrender.com",
+                target:API_URL,
                 changeOrigin: true,
                 secure: false,
             },
