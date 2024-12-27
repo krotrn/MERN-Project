@@ -6,7 +6,6 @@ import morgan from "morgan"; // for logging
 import helmet from "helmet"; // for security
 import path from "path";
 import { fileURLToPath } from "url";
-import rateLimit from "express-rate-limit"; // for rate limiting
 
 // files
 
@@ -34,14 +33,13 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use(express.json()); // for parsing application/json
 app.use(cookieParser()); // for parsing cookies
 
-app.use(rateLimit);
 
-app.use(
-  cors({
-    origin: ["https://mern-kr.vercel.app", "http://localhost:3000", "https://mern-project-qqxh.onrender.com"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["https://mern-kr.vercel.app", "http://localhost:3000"],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   })
+// );
 
 app.use(morgan("dev")); // for logging
 app.use(helmet()); // for security

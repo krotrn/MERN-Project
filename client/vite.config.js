@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import {API_URL} from './src/redux/constants.js'
+import {BASE_URL} from './src/redux/constants.js'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,12 +8,12 @@ export default defineConfig({
     server: {
         proxy: {
             "/api/": {
-                target: API_URL,
+                target: BASE_URL,
                 changeOrigin: true,
                 secure: false,
             },
             "/uploads/": {
-                target:API_URL,
+                target:BASE_URL,
                 changeOrigin: true,
                 secure: false,
             },
