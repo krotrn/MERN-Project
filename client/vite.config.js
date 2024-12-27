@@ -7,12 +7,12 @@ export default defineConfig({
     server: {
         proxy: {
             "/api/": {
-                target: "http://localhost:3000",
+                target: import.meta.env.BASE_URL,
                 changeOrigin: true, // for CORS
                 secure: false, // for using HTTP instead of HTTPS
             },
             "/uploads/": {
-                target: "http://localhost:3000",
+                target: import.meta.env.BASE_URL,
                 changeOrigin: true,
                 secure: false,
             },
