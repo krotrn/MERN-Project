@@ -2,25 +2,37 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="fixed top-0 left-0 h-screen w-[16rem] border-r-2 border-[#ffffff] bg-[#000000] text-white hidden md:block">
-      <aside>
-        <ul className="py-6">
-          {[
-            { path: "/admin/movies/dashboard", label: "Dashboard" },
-            { path: "/admin/movies/create", label: "Create Movie" },
-            { path: "/admin/movies/genre", label: "Create Genre" },
-            { path: "/admin/movies-list", label: "Update Movie" },
-            { path: "/admin/movies/comments", label: "Comments" },
-          ].map(({ path, label }) => (
-            <li
-              key={path}
-              className="text-lg hover:bg-gradient-to-b hover:transform hover:scale-105 transition-transform duration-500 from-green-500 to-lime-400 rounded-full mb-6"
+    <div className="-translate-y-10 flex h-screen fixed mt-10 border-r-2 border-[#ffffff]">
+      <aside className="text-white w-64 flex-shrink-0">
+        <ul className="py-4">
+          <li className="text-lg  bg-gradient-to-b from-green-500 to-lime-400 rounded-full -translate-x-6">
+            <Link
+              to="/admin/movies/dashboard"
+              className="block p-2 ml-20 mb-10"
             >
-              <Link to={path} className="block py-2 px-6">
-                {label}
-              </Link>
-            </li>
-          ))}
+              Dashboard
+            </Link>
+          </li>
+          <li className="text-lg -translate-x-6 hover:bg-gradient-to-b from-green-500 to-lime-400 rounded-full text-black">
+            <Link to="/admin/movies/create" className="block p-2 ml-20 mb-10">
+              Create Movie
+            </Link>
+          </li>
+          <li className="text-lg -translate-x-6 hover:bg-gradient-to-b from-green-500 to-lime-400 rounded-full text-black">
+            <Link to="/admin/movies/genre" className="block p-2 ml-20 mb-10">
+              Create Genre
+            </Link>
+          </li>
+          <li className="text-lg -translate-x-6 hover:bg-gradient-to-b from-green-500 to-lime-400 rounded-full text-black">
+            <Link to="/admin/movies-list" className="block p-2 ml-20 mb-10">
+              Update Movie
+            </Link>
+          </li>
+          <li className="text-lg -translate-x-6 hover:bg-gradient-to-b from-green-500 to-lime-400 rounded-full text-black">
+            <Link to="/admin/movies/comments" className="block p-2 ml-20 mb-10">
+              Comments
+            </Link>
+          </li>
         </ul>
       </aside>
     </div>

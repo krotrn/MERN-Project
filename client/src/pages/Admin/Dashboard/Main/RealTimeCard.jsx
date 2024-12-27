@@ -1,3 +1,4 @@
+
 import { useGetUsersQuery } from "../../../../redux/api/user";
 import PrimaryCard from "./PrimaryCard";
 
@@ -7,10 +8,14 @@ const RealTimeCard = () => {
 
 
   return (
-    <div className="w-full md:w-[90%] bg-[#1e1e1e] text-white rounded-lg p-6 mt-5">
-      <h2 className="text-lg md:text-xl font-bold mb-4">Real-Time Updates </h2>
-      <h3 className="text-lg text-center font-bold">{visitors?.length}</h3>
-      <p className="text-sm md:text-base">Monitor activity in real time!</p>
+    <div className="w-[30rem] mt-10 bg-[#282828] text-[#fff] rounded-lg shadow-lg p-4">
+      <h2 className="text-2xl font-bold mb-2">Realtime</h2>
+      <p className="text-gray-500 mb-4">Update Live</p>
+      <div className="border-t border-[#666] my-7"></div>
+      <h2 className="text-2xl font-bold mb-2">{visitors?.length}</h2>
+      <p className="text-gray-500 mb-2">Subscribe</p>
+      <hr />
+
       <PrimaryCard />
     </div>
   );

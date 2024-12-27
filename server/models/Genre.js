@@ -28,13 +28,17 @@ const genreSchema = new Schema(
 
 // Middleware: Ensure `name` is saved in lowercase
 genreSchema.pre("save", function (next) {
-  this.name = this.name
-  .split(" ")
-  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(" ");
+  this.name = this.name.toLowerCase(); // Normalize genre names to lowercase
   next();
 });
 
+// Virtual Field: Capitalized name for display purposes
+genreSchema.virtual("displayName").get(function () {
+  return this.name
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+});
 
 
 export default model("Genre", genreSchema);

@@ -27,13 +27,13 @@ const Header = () => {
       <nav className="w-full md:w-1/4 mb-6 md:mb-0">
         <Link
           to="/"
-          className="hover:transform hover:scale-105 transition-transform duration-500 ease-in-out hover:bg-teal-200 block p-3 rounded mb-2 text-lg font-medium text-teal-800"
+          className="transition duration-300 ease-in-out hover:bg-teal-200 block p-3 rounded mb-2 text-lg font-medium text-teal-800"
         >
           Home
         </Link>
         <Link
           to="/movies"
-          className="hover:transform hover:scale-105 transition-transform duration-500 ease-in-out hover:bg-teal-200 block p-3 rounded mb-2 text-lg font-medium text-teal-800"
+          className="transition duration-300 ease-in-out hover:bg-teal-200 block p-3 rounded mb-2 text-lg font-medium text-teal-800"
         >
           Browse Movies
         </Link>
