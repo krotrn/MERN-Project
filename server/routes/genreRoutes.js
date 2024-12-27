@@ -18,7 +18,7 @@ import checkId from "../middlewares/checkId.js";
 router
   .route("/")
   .post(authenticate, authorizeAdmin, createGenre)
-  .get(authenticate, getAllGenres);
+  .get(getAllGenres);
 
 router
   .route("/:id")
