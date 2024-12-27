@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser"; // for parsing cookies
 import dotenv from "dotenv"; // for environment variables
-// import cors from "cors"; // for cross-origin requests
+import cors from "cors"; // for cross-origin requests
 import morgan from "morgan"; // for logging
 import helmet from "helmet"; // for security
 import path from "path";
@@ -25,11 +25,6 @@ connectDB();
 // create express app
 const app = express();
 
-// // Implement rate limiting
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   max: 100, // Limit each IP to 100 requests per windowMs
-// });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT;
@@ -39,14 +34,14 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use(express.json()); // for parsing application/json
 app.use(cookieParser()); // for parsing cookies
 
-// app.use(limiter);
+app.use(rateLimit);
 
-// app.use(
-//   cors({
-//     origin: ["https://example.com"], // Allow specific domains only
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//   })
-// );
+app.use(
+  cors({
+    origin: ["https://mern-kr.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use(morgan("dev")); // for logging
 app.use(helmet()); // for security
