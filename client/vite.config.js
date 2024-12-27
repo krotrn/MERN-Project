@@ -7,16 +7,17 @@ export default defineConfig({
     server: {
         proxy: {
             "/api/": {
-                target: String(import.meta.env.VITE_BASE_URL),
-                changeOrigin: true, // for CORS
-                secure: false, // for using HTTP instead of HTTPS
+                target: import.meta.env.VITE_BASE_URL || "http://localhost:3000",
+                changeOrigin: true,
+                secure: false,
             },
             "/uploads/": {
-                target: String(import.meta.env.VITE_BASE_URL),
+                target: import.meta.env.VITE_BASE_URL || "http://localhost:3000",
                 changeOrigin: true,
                 secure: false,
             },
         },
     },
 });
+
 
