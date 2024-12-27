@@ -38,7 +38,7 @@ app.use(rateLimit);
 
 app.use(
   cors({
-    origin: ["https://mern-kr.vercel.app/", "http://localhost:3000", "https://mern-project-qqxh.onrender.com"],
+    origin: ["https://mern-kr.vercel.app", "http://localhost:3000", "https://mern-project-qqxh.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
