@@ -36,6 +36,7 @@ app.use(
     origin: [
       "http://localhost:5173", // For local development
       "https://mern-kr.vercel.app", // Your deployed frontend URL
+      "http://localhost:3000",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
