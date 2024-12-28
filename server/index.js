@@ -1,51 +1,57 @@
 import express from "express";
-import cookieParser from "cookie-parser"; // for parsing cookies
-import dotenv from "dotenv"; // for environment variables
-import cors from "cors"; // for cross-origin requests
-import helmet from "helmet"; // for security
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+import cors from "cors";
+import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// files
-
+// Import files
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import genreRoutes from "./routes/genreRoutes.js";
 import movieRoutes from "./routes/movieRoutes.js";
 import uploadRoutes from "./routes/uploadRoute.js";
 
-// configuration of environment variables
+// Configuring environment variables
 dotenv.config();
 
-// connect to database
+// Connect to database
 connectDB();
 
-// create express app
+// Create express app
 const app = express();
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-// middlewares
-app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded data (form data)
-app.use(express.json()); // for parsing application/json
-app.use(cookieParser()); // for parsing cookies
-
+// Middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://mern-kr.vercel.app"], 
+    origin: [
+      "http://localhost:5173", // For local development
+      "https://mern-kr.vercel.app", // Your deployed frontend URL
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 
-app.use(helmet()); // for security
+app.use(helmet());
 
+// Routes
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/genres", genreRoutes);
+app.use("/api/v1/movies", movieRoutes);
+app.use("/api/v1/uploads", uploadRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-// Global error handling middleware
+// Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({
@@ -54,13 +60,15 @@ app.use((err, req, res, next) => {
   });
 });
 
-// routes
-app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/genres", genreRoutes);
-app.use("/api/v1/movies", movieRoutes);
-app.use("/api/v1/uploads", uploadRoutes);
+// Fallback route for unknown API endpoints
+app.use((req, res) => {
+  res.status(404).json({
+    message: "API endpoint not found",
+  });
+});
 
-// lisen to port
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
+  console.log(`Backend is accessible at https://your-backend.vercel.app`);
 });
