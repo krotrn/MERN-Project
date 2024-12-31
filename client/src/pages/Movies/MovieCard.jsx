@@ -6,8 +6,9 @@ const MovieCard = ({ movie }) => {
   const handleImageError = (e) => {
     e.target.src = "/default-image-placeholder.png";
   };
-  const response = useFetchOneGenreQuery(movie.genre)
-  const genre = response?.data
+  const { data: response } = useFetchOneGenreQuery(movie.genre)
+  const genre = response?.data || {name:""}
+
 
 
 
