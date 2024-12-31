@@ -47,13 +47,11 @@ const AllMovies = () => {
     [movies]
   );
 
-  const [isDebouncing, setIsDebouncing] = useState(false);
-  const debounceRef = useRef(null);
 
   // Initialize filtered movies
   useEffect(() => {
     dispatch(setFilterMovies(movies));
-  }, [dispatch, movies]);
+  }, [dispatch, movies, moviesFilter]);
 
   // Universal filter function
   const applyFilters = useCallback(() => {
@@ -109,17 +107,6 @@ const AllMovies = () => {
   // Handle input changes
   const handleInputChange = (type, value) => {
     dispatch(setMoviesFilter({ [type]: value }));
-
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-
-    debounceRef.current = setTimeout(() => {
-      setIsDebouncing(false);
-      applyFilters();
-    }, 300);
-
-    setIsDebouncing(true);
   };
 
   // Loader or error handling
@@ -215,9 +202,7 @@ const AllMovies = () => {
 
       {/* Movies Grid */}
       <section className="p-4 w-full max-w-screen-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {isDebouncing ? (
-          <p className="col-span-full text-center text-gray-500">Loading...</p>
-        ) : filteredMovies.length === 0 ? (
+        {(!filteredMovies ||filteredMovies.length === 0) ? (
           <p className="col-span-full text-center text-gray-500">
             No movies found
           </p>

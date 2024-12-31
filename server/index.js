@@ -71,5 +71,5 @@ app.use((req, res) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
-  console.log(`Backend is accessible at https://your-backend.vercel.app`);
+  console.log(`Backend is accessible at http://localhost:${PORT}/api/v1`);
 });

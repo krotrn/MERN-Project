@@ -25,7 +25,7 @@ export const genreApiSlice = apiSlice.injectEndpoints({
 
     // Mutation: Delete a genre
     deleteGenre: builder.mutation({
-      query: ( {id} ) => ({
+      query: ({ id }) => ({
         url: `${GENRE_URL}/${id}`,
         method: "DELETE",
       }),

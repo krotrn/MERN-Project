@@ -41,7 +41,6 @@ const MoviesContainerPage = () => {
   const { data: genreResponse, isLoading: isLoadingGenres } =
     useFetchGenresQuery();
   const genres = genreResponse?.data || [];
-  console.log(genres)
 
   // State for Selected Genre
   const [selectedGenre, setSelectedGenre] = useState(null);

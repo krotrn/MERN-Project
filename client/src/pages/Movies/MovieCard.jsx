@@ -6,8 +6,8 @@ const MovieCard = ({ movie }) => {
   const handleImageError = (e) => {
     e.target.src = "/default-image-placeholder.png";
   };
-  const { data: response } = useFetchOneGenreQuery(movie.genre)
-  const genre = response?.data || {name:""}
+  const response = useFetchOneGenreQuery(movie.genre)
+  const genre = response?.data
 
 
 
@@ -36,11 +36,11 @@ const MovieCard = ({ movie }) => {
         </div>
       </Link>
 
-      {/* Extra Info (Optional) */}
+      {/* Extra Info */}
       <div className="mt-4 text-center">
         <h3 className="text-lg font-semibold text-gray-800">{movie.title}</h3>
         {movie.genre && (
-          <p className="text-sm text-gray-500">{genre?.name ? genre.name : "Default Genre"}</p>
+          <p className="text-sm text-gray-500">{genre?.name}</p>
         )}
         {movie.year && (
           <p className="text-sm text-gray-500">Released: {movie.year}</p>
