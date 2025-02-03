@@ -25,6 +25,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 3000;
+const clientUrl = process.env.CLIENT_URL;
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
@@ -35,7 +36,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // For local development
-      "https://mern-kr.vercel.app", // Your deployed frontend URL
+      clientUrl, // Your deployed frontend URL
       "http://localhost:3000",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
