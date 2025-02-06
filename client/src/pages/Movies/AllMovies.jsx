@@ -1,7 +1,7 @@
 import { useGetAllMoviesQuery } from "../../redux/api/movies";
 import { useFetchGenresQuery } from "../../redux/api/genre";
 import MovieCard from "./MovieCard";
-import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import banner from "../../assets/banner.jpg";
 import {

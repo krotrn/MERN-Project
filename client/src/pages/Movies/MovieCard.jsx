@@ -2,10 +2,6 @@ import { Link } from "react-router-dom";
 import { useFetchOneGenreQuery } from "../../redux/api/genre";
 
 const MovieCard = ({ movie }) => {
-
-  const handleImageError = (e) => {
-    e.target.src = "/default-image-placeholder.png";
-  };
   const { data: response } = useFetchOneGenreQuery(movie.genre)
   const genre = response?.data || {name:""}
 
@@ -23,9 +19,8 @@ const MovieCard = ({ movie }) => {
         <div className="relative">
           {/* Movie Poster */}
           <img
-            src={movie.image}
+            src={movie.image ??  "/default-image-placeholder.png"}
             alt={movie.title || "Movie Poster"}
-            onError={handleImageError}
             className="w-full h-[15rem] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-50"
           />
           {/* Title Overlay */}
