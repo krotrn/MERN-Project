@@ -1,7 +1,7 @@
 import { useGetAllMoviesQuery } from "../../redux/api/movies";
 import { useFetchGenresQuery } from "../../redux/api/genre";
 import MovieCard from "./MovieCard";
-import { useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo, useCallback, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import banner from "../../assets/banner.jpg";
 import {
@@ -28,13 +28,11 @@ const AllMovies = () => {
   // Fetch movies and genres
   const {
     data: moviesResponse,
-    isLoading: isLoadingMovies,
     error: moviesError,
-  } = useGetAllMoviesQuery(filters);
+  } = useGetAllMoviesQuery({ ...filters, limit: 2000 });
 
   const {
     data: genresResponse,
-    isLoading: isLoadingGenres,
     error: genresError,
   } = useFetchGenresQuery();
 
@@ -46,7 +44,6 @@ const AllMovies = () => {
     () => Array.from(new Set(movies.map((movie) => movie.year))),
     [movies]
   );
-
 
   // Initialize filtered movies
   useEffect(() => {
@@ -60,7 +57,9 @@ const AllMovies = () => {
     // Search filter
     if (moviesFilter.searchTerm) {
       filtered = filtered.filter((movie) =>
-        movie.title.toLowerCase().includes(moviesFilter.searchTerm.toLowerCase())
+        movie.title
+          .toLowerCase()
+          .includes(moviesFilter.searchTerm.toLowerCase())
       );
     }
 
@@ -110,7 +109,6 @@ const AllMovies = () => {
   };
 
   // Loader or error handling
-  if (isLoadingMovies || isLoadingGenres) return <Loader />;
   if (moviesError || genresError) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -201,17 +199,19 @@ const AllMovies = () => {
       </section>
 
       {/* Movies Grid */}
-      <section className="p-4 w-full max-w-screen-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {(!filteredMovies ||filteredMovies.length === 0) ? (
-          <p className="col-span-full text-center text-gray-500">
-            No movies found
-          </p>
-        ) : (
-          filteredMovies.map((movie) => (
-            <MovieCard key={movie._id} movie={movie} />
-          ))
-        )}
-      </section>
+      <Suspense fallback = {<Loader />}>
+        <section className="p-4 w-full max-w-screen-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {!filteredMovies || filteredMovies.length === 0 ? (
+            <p className="col-span-full text-center text-gray-500">
+              No movies found
+            </p>
+          ) : (
+            filteredMovies.map((movie) => (
+              <MovieCard key={movie._id} movie={movie} />
+            ))
+          )}
+        </section>
+      </Suspense>
     </div>
   );
 };

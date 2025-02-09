@@ -1,7 +1,7 @@
 import { useGetAllMoviesQuery } from "../../redux/api/movies";
 import { useFetchGenresQuery } from "../../redux/api/genre";
 import SliderUtil from "../../components/SliderUtil";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Loader from "../../components/Loader";
 
 const MoviesContainerPage = () => {
@@ -13,7 +13,7 @@ const MoviesContainerPage = () => {
   };
 
   // Fetch New Movies
-  const { data: newResponse, isLoading: isLoadingNew } = useGetAllMoviesQuery({
+  const { data: newResponse } = useGetAllMoviesQuery({
     ...baseFilters,
     sort: "createdAt",
     order: "desc",
@@ -21,20 +21,19 @@ const MoviesContainerPage = () => {
   const newMovies = newResponse?.data || [];
 
   // Fetch Top Movies
-  const { data: topResponse, isLoading: isLoadingTop } = useGetAllMoviesQuery({
+  const { data: topResponse } = useGetAllMoviesQuery({
     ...baseFilters,
     sort: "numReviews",
     order: "desc",
   });
   const topMovies = topResponse?.data || [];
 
-  const { data: randomResponse, isLoading: isLoadingRandom } =
-    useGetAllMoviesQuery({
-      ...baseFilters,
-      sort: "createdAt",
-      order: "asc",
-      random:true
-    });
+  const { data: randomResponse } = useGetAllMoviesQuery({
+    ...baseFilters,
+    sort: "createdAt",
+    order: "asc",
+    random: true,
+  });
   const randomMovies = randomResponse?.data || [];
 
   // Fetch Genres
@@ -80,13 +79,17 @@ const MoviesContainerPage = () => {
         {/* Random Movies */}
         <div className="w-full mb-8">
           <h1 className="text-2xl font-semibold mb-4">Recommended for You</h1>
-          {isLoadingRandom ? <Loader /> : <SliderUtil data={randomMovies} />}
+          <Suspense fallback={<Loader />}>
+            <SliderUtil data={randomMovies} />
+          </Suspense>
         </div>
 
         {/* Top Movies */}
         <div className="w-full mb-8">
           <h1 className="text-2xl font-semibold mb-4">Top Movies</h1>
-          {isLoadingTop ? <Loader /> : <SliderUtil data={topMovies} />}
+          <Suspense fallback={<Loader />}>
+            <SliderUtil data={topMovies} />
+          </Suspense>
         </div>
 
         {/* Filtered Movies */}
@@ -94,7 +97,9 @@ const MoviesContainerPage = () => {
           <h1 className="text-2xl font-semibold mb-4">
             {selectedGenre ? "Movies by Genre" : "All Movies"}
           </h1>
-          {isLoadingNew ? <Loader /> : <SliderUtil data={filteredMovies} />}
+          <Suspense fallback={<Loader />}>
+            <SliderUtil data={filteredMovies} />
+          </Suspense>
         </div>
       </section>
     </div>
