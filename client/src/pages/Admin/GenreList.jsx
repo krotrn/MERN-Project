@@ -85,7 +85,7 @@ const GenreList = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="p-6 min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-100 to-gray-300 backdrop-blur-md rounded-lg shadow-2xl">
+    <div className="p-6 min-h-screen flex flex-col items-center bg-linear-to-br from-gray-100 to-gray-300 backdrop-blur-md rounded-lg shadow-2xl">
       <h1 className="text-4xl font-extrabold mb-8 text-teal-700 drop-shadow-lg">
         Genre Management
       </h1>
@@ -97,7 +97,7 @@ const GenreList = () => {
         <input
           type="text"
           name="genre"
-          className="py-3 px-4 border rounded-xl w-full focus:ring-4 focus:ring-teal-400 focus:outline-none text-gray-700 placeholder-gray-500 shadow-sm"
+          className="py-3 px-4 border rounded-xl w-full focus:ring-4 focus:ring-teal-400 focus:outline-hidden text-gray-700 placeholder-gray-500 shadow-xs"
           placeholder="Enter new genre"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -106,7 +106,7 @@ const GenreList = () => {
         />
         <button
           type="submit"
-          className="bg-gradient-to-r from-teal-500 to-green-400 text-white py-3 px-6 rounded-xl hover:from-teal-600 hover:to-green-500 focus:outline-none focus:ring-4 focus:ring-teal-400"
+          className="bg-linear-to-r from-teal-500 to-green-400 text-white py-3 px-6 rounded-xl hover:from-teal-600 hover:to-green-500 focus:outline-hidden focus:ring-4 focus:ring-teal-400"
           disabled={isCreating}
         >
           {isCreating ? <Loader /> : "Add Genre"}
@@ -118,7 +118,7 @@ const GenreList = () => {
           genres.map((genre) => (
             <button
               key={genre._id}
-              className="bg-white bg-opacity-80 border border-teal-500 text-teal-700 py-2 px-4 rounded-xl hover:bg-teal-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-teal-400 shadow-lg transition-transform transform hover:scale-105"
+              className="bg-white bg-opacity-80 border border-teal-500 text-teal-700 py-2 px-4 rounded-xl hover:bg-teal-500 hover:text-white focus:outline-hidden focus:ring-4 focus:ring-teal-400 shadow-lg transition-transform transform hover:scale-105"
               onClick={() => {
                 setModalVisible(true);
                 setSelectedGenre(genre);
@@ -138,13 +138,13 @@ const GenreList = () => {
       {modalVisible && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white bg-opacity-95 p-8 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-lg border border-teal-500">
-            <h2 className="text-2xl font-bold mb-6 text-teal-600 drop-shadow-sm">
+            <h2 className="text-2xl font-bold mb-6 text-teal-600 drop-shadow-xs">
               Edit Genre
             </h2>
             <form onSubmit={handleUpdateGenre} className="space-y-6">
               <input
                 type="text"
-                className="py-3 px-4 border rounded-xl w-full focus:ring-4 focus:ring-teal-400 focus:outline-none text-gray-700 placeholder-gray-500 shadow-sm"
+                className="py-3 px-4 border rounded-xl w-full focus:ring-4 focus:ring-teal-400 focus:outline-hidden text-gray-700 placeholder-gray-500 shadow-xs"
                 value={updatingName}
                 onChange={(e) => setUpdatingName(e.target.value)}
                 name="genre"
@@ -154,7 +154,7 @@ const GenreList = () => {
               <div className="flex justify-between">
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-teal-500 to-green-400 text-white py-3 px-6 rounded-xl hover:from-teal-600 hover:to-green-500 focus:outline-none focus:ring-4 focus:ring-teal-400"
+                  className="bg-linear-to-r from-teal-500 to-green-400 text-white py-3 px-6 rounded-xl hover:from-teal-600 hover:to-green-500 focus:outline-hidden focus:ring-4 focus:ring-teal-400"
                   disabled={isUpdating}
                 >
                   {isUpdating ? <Loader /> : "Update"}
@@ -162,7 +162,7 @@ const GenreList = () => {
                 <button
                   type="button"
                   onClick={handleDeleteGenre}
-                  className="bg-gradient-to-r from-red-500 to-pink-400 text-white py-3 px-6 rounded-xl hover:from-red-600 hover:to-pink-500 focus:outline-none focus:ring-4 focus:ring-red-400"
+                  className="bg-linear-to-r from-red-500 to-pink-400 text-white py-3 px-6 rounded-xl hover:from-red-600 hover:to-pink-500 focus:outline-hidden focus:ring-4 focus:ring-red-400"
                   disabled={isDeleting}
                 >
                   {isDeleting ? <Loader /> : "Delete"}
@@ -171,7 +171,7 @@ const GenreList = () => {
             </form>
             <button
               onClick={closeModal}
-              className="mt-6 text-gray-500 hover:text-gray-700 focus:outline-none transition-colors"
+              className="mt-6 text-gray-500 hover:text-gray-700 focus:outline-hidden transition-colors"
             >
               Cancel
             </button>

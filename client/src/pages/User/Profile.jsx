@@ -80,7 +80,7 @@ const Profile = () => {
                 type="text"
                 id="username"
                 placeholder="Enter your name"
-                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-hidden focus:ring-2 focus:ring-teal-500"
                 value={username}
                 onChange={handleChange}
                 autoComplete="username"
@@ -95,7 +95,7 @@ const Profile = () => {
                 type="email"
                 id="email"
                 placeholder="Enter your email"
-                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-hidden focus:ring-2 focus:ring-teal-500"
                 value={email}
                 onChange={handleChange}
                 autoComplete="email"
@@ -110,7 +110,7 @@ const Profile = () => {
                 type="password"
                 id="password"
                 placeholder="Enter a new password"
-                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-hidden focus:ring-2 focus:ring-teal-500"
                 value={password}
                 onChange={handleChange}
                 autoComplete="new-password"
@@ -139,7 +139,7 @@ const Profile = () => {
                 type="password"
                 id="confirmPassword"
                 placeholder="Confirm your password"
-                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="form-input p-3 rounded-md w-full border border-gray-600 bg-gray-700 text-gray-200 focus:outline-hidden focus:ring-2 focus:ring-teal-500"
                 value={confirmPassword}
                 onChange={handleChange}
                 autoComplete="new-password"

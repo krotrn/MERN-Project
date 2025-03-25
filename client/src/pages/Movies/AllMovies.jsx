@@ -135,7 +135,7 @@ const AllMovies = () => {
         className="w-full h-[50rem] flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${banner})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-black opacity-70"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-gray-800 to-black opacity-70"></div>
         <div className="relative z-10 text-center text-white mt-[10rem]">
           <h1 className="text-6xl font-bold mb-4">The Movies Hub</h1>
           <p className="text-2xl">
@@ -145,20 +145,20 @@ const AllMovies = () => {
       </div>
 
       {/* Filters Section */}
-      <section className="mt-[-5rem] p-4 w-full max-w-screen-lg">
+      <section className="mt-[-5rem] p-4 w-full max-w-(--breakpoint-lg)">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           {/* Search Input */}
           <input
             type="text"
             placeholder="Search Movie"
-            className="flex-grow border rounded px-4 py-2 outline-none text-lg"
+            className="grow border rounded-sm px-4 py-2 outline-hidden text-lg"
             value={moviesFilter.searchTerm || ""}
             onChange={(e) => handleInputChange("searchTerm", e.target.value)}
           />
 
           {/* Genre Filter */}
           <select
-            className="border p-2 rounded text-lg"
+            className="border p-2 rounded-sm text-lg"
             value={moviesFilter.selectedGenre || ""}
             onChange={(e) => handleInputChange("selectedGenre", e.target.value)}
           >
@@ -172,7 +172,7 @@ const AllMovies = () => {
 
           {/* Year Filter */}
           <select
-            className="border p-2 rounded text-lg"
+            className="border p-2 rounded-sm text-lg"
             value={moviesFilter.selectedYear || ""}
             onChange={(e) => handleInputChange("selectedYear", e.target.value)}
           >
@@ -186,7 +186,7 @@ const AllMovies = () => {
 
           {/* Sort Options */}
           <select
-            className="border p-2 rounded text-lg"
+            className="border p-2 rounded-sm text-lg"
             value={moviesFilter.selectedSort || ""}
             onChange={(e) => handleInputChange("selectedSort", e.target.value)}
           >
@@ -200,7 +200,7 @@ const AllMovies = () => {
 
       {/* Movies Grid */}
       <Suspense fallback = {<Loader />}>
-        <section className="p-4 w-full max-w-screen-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <section className="p-4 w-full max-w-(--breakpoint-lg) grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {!filteredMovies || filteredMovies.length === 0 ? (
             <p className="col-span-full text-center text-gray-500">
               No movies found

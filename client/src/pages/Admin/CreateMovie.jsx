@@ -123,7 +123,7 @@ const CreateMovie = () => {
             id="title"
             value={movieData.title}
             onChange={handleChange}
-            className="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="border rounded-sm px-4 py-2 w-full focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             placeholder="Enter movie title"
             autoComplete="title"
             required
@@ -144,7 +144,7 @@ const CreateMovie = () => {
             id="year"
             value={movieData.year}
             onChange={handleChange}
-            className="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="border rounded-sm px-4 py-2 w-full focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             min="1900"
             max={new Date().getFullYear()}
             autoComplete="year"
@@ -167,7 +167,7 @@ const CreateMovie = () => {
             value={movieData.detail}
             onChange={handleChange}
             autoComplete="detail"
-            className="border rounded px-4 py-2 w-full h-32 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="border rounded-sm px-4 py-2 w-full h-32 focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             placeholder="Enter movie description"
             required
           ></textarea>
@@ -188,7 +188,7 @@ const CreateMovie = () => {
             value={movieData.cast}
             onChange={handleCastChange}
             autoComplete="cast"
-            className="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="border rounded-sm px-4 py-2 w-full focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             placeholder="Enter cast members"
             required
           />
@@ -208,7 +208,7 @@ const CreateMovie = () => {
             value={movieData.genre}
             onChange={handleChange}
             autoComplete="genre"
-            className="border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 text-black focus:ring-teal-400"
+            className="border rounded-sm px-4 py-2 w-full focus:outline-hidden focus:ring-2 text-black focus:ring-teal-400"
             required
           >
             <option value="" disabled>
@@ -240,7 +240,7 @@ const CreateMovie = () => {
             <img
               src={handlePreviewImage()}
               alt="Preview Image"
-              className="mt-4 w-32 h-32 object-cover rounded border"
+              className="mt-4 w-32 h-32 object-cover rounded-sm border"
             />
           )}
         </div>
@@ -248,7 +248,7 @@ const CreateMovie = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-teal-500 text-white font-semibold py-3 rounded focus:outline-none focus:ring-2 focus:ring-teal-400 hover:bg-teal-600 transition disabled:opacity-50"
+          className="w-full bg-teal-500 text-white font-semibold py-3 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-400 hover:bg-teal-600 transition disabled:opacity-50"
           disabled={isCreatingMovie || isUploading || isFetchingGenre}
         >
           {isCreatingMovie || isUploading ? <Loader /> : "Create Movie"}

@@ -106,7 +106,7 @@ const Register = () => {
               type="text"
               id="username"
               name="username"
-              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your username"
               value={username}
               onChange={handleChange}
@@ -123,7 +123,7 @@ const Register = () => {
               type="email"
               id="email"
               name="email"
-              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your email"
               value={email}
               onChange={handleChange}
@@ -140,7 +140,7 @@ const Register = () => {
               type="password"
               id="password"
               name="password"
-              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-500"
               placeholder="Enter your password"
               value={password}
               onChange={handleChange}
@@ -171,7 +171,7 @@ const Register = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 bg-[#d2d4da] text-gray-900 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-500"
               placeholder="Re-enter your password"
               value={confirmPassword}
               onChange={handleChange}

@@ -14,7 +14,7 @@ const Sidebar = () => {
           ].map(({ path, label }) => (
             <li
               key={path}
-              className="text-lg hover:bg-gradient-to-b hover:transform hover:scale-105 transition-transform duration-500 from-green-500 to-lime-400 rounded-full mb-6"
+              className="text-lg hover:bg-linear-to-b hover:transform hover:scale-105 transition-transform duration-500 from-green-500 to-lime-400 rounded-full mb-6"
             >
               <Link to={path} className="block py-2 px-6">
                 {label}

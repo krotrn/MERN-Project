@@ -154,7 +154,7 @@ const UpdateMovie = () => {
             name="title"
             value={movieData.title}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="w-full px-4 py-2 border rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             required
           />
         </div>
@@ -170,7 +170,7 @@ const UpdateMovie = () => {
             id="year"
             value={movieData.year}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="w-full px-4 py-2 border rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             min="1900"
             max={new Date().getFullYear()}
             required
@@ -188,7 +188,7 @@ const UpdateMovie = () => {
               id="genre"
               value={movieData.genre}
               onChange={handleChange}
-              className="w-full text-black px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
+              className="w-full text-black px-4 py-2 border rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-400"
               required
             >
               <option value="" disabled>
@@ -216,7 +216,7 @@ const UpdateMovie = () => {
             id="cast"
             value={movieData.cast}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="w-full px-4 py-2 border rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             required
           />
         </div>
@@ -231,7 +231,7 @@ const UpdateMovie = () => {
             id="detail"
             value={movieData.detail}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="w-full px-4 py-2 border rounded-sm focus:outline-hidden focus:ring-2 focus:ring-teal-400"
             rows="4"
             required
           ></textarea>
@@ -261,7 +261,7 @@ const UpdateMovie = () => {
             <img
               src={handlePreviewImage()}
               alt="Preview Image"
-              className="mt-4 w-32 h-32 object-cover rounded border"
+              className="mt-4 w-32 h-32 object-cover rounded-sm border"
             />
           )}
         </div>
@@ -270,7 +270,7 @@ const UpdateMovie = () => {
           <button
             type="submit"
             disabled={isUpdating || isUploading || isFetchingMovie}
-            className="flex-1 bg-teal-500 text-white py-2 rounded hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="flex-1 bg-teal-500 text-white py-2 rounded-sm hover:bg-teal-600 focus:outline-hidden focus:ring-2 focus:ring-teal-400"
           >
             {isUpdating || isUploading ? <Loader /> : "Update Movie"}
           </button>
@@ -278,7 +278,7 @@ const UpdateMovie = () => {
             type="button"
             onClick={handleDelete}
             disabled={isDeleting || isDeletingImage}
-            className="flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+            className="flex-1 bg-red-500 text-white py-2 rounded-sm hover:bg-red-600 focus:outline-hidden focus:ring-2 focus:ring-red-400"
           >
             {isDeleting || isDeletingImage ? <Loader /> : "Delete Movie"}
           </button>

@@ -46,7 +46,7 @@ const AdminMoviesList = () => {
         </h1>
         <Link
           to="/admin/movies/create"
-          className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded shadow-md"
+          className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-sm shadow-md"
         >
           Add New Movie
         </Link>
@@ -61,13 +61,13 @@ const AdminMoviesList = () => {
             placeholder="Filter by Year"
             value={filters.year}
             onChange={handleFilterChange}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-teal-500 text-black"
           />
           <select
             name="genre"
             value={filters.genre}
             onChange={handleFilterChange}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-teal-500 text-black"
           >
             <option value="">
               {isFetchingGenre ? "Loading genres..." : "Select a genre"}
@@ -85,7 +85,7 @@ const AdminMoviesList = () => {
             name="sort"
             value={filters.sort}
             onChange={handleFilterChange}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-teal-500 text-black"
           >
             <option value="createdAt">Sort by Date</option>
             <option value="name">Sort by Name</option>
@@ -94,7 +94,7 @@ const AdminMoviesList = () => {
             name="order"
             value={filters.order}
             onChange={handleFilterChange}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-teal-500 text-black"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -143,7 +143,7 @@ const AdminMoviesList = () => {
                     <div className="mt-4 flex justify-between items-center">
                       <Link
                         to={`/admin/movies/update/${movie._id}`}
-                        className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-1 px-3 rounded"
+                        className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-1 px-3 rounded-sm"
                       >
                         Update
                       </Link>
@@ -151,7 +151,7 @@ const AdminMoviesList = () => {
                         {new Date(movie.createdAt).toLocaleDateString()}
                       </span>
                     </div>
-                    <div className="bg-teal-500 w-fit text-white font-bold py-1 px-3 rounded mt-2">
+                    <div className="bg-teal-500 w-fit text-white font-bold py-1 px-3 rounded-sm mt-2">
                       {genres
                         .filter((genre) => movie.genre === genre._id)
                         .map((genre) => genre.name)
@@ -170,7 +170,7 @@ const AdminMoviesList = () => {
         <button
           disabled={page === 1}
           onClick={() => setPage((prev) => prev - 1)}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded disabled:opacity-50"
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-sm disabled:opacity-50"
         >
           Previous
         </button>
@@ -180,7 +180,7 @@ const AdminMoviesList = () => {
         <button
           disabled={page === totalPages}
           onClick={() => setPage((prev) => prev + 1)}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded disabled:opacity-50"
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-sm disabled:opacity-50"
         >
           Next
         </button>
